@@ -1,10 +1,21 @@
-<html ng-app>
-
+<html ng-app ng-csp>
 <head>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <h1>Workify Project List</h1>
+
+    <div id="todo-list" ng-controller="TodoCtrl">
+        <div ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.done">
+            <span class="done-{{todo.done}}">{{todo.title}}</span>
+        </div>
+        <form ng-submit="addTodo()" class="pure-form">
+            <input type="text" ng-model="todoInput" placeholder="Add a project">
+            <button type="submit" class="pure-button pure-button-primary">Add</button>
+        </form>
+    </div>
 
     <script src="components/angular/angular.js"></script>
     <script src="main.js"></script>
