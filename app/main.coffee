@@ -1,22 +1,28 @@
 TodoCtrl = ($scope) ->
-  $scope.todos = [
-    title: "Build Workify"
-    done: false
-  ,
-    title: "Make workify save to chrome localstorage"
-    done: false
-  ,
-    title: "Make workify block pages"
-    done: false
-  ,
-    title: "Pass exams"
-    done: false
-  ,
-    title: "Learn WebGL"
-    done: false
-  ]
 
-  $scope.addTodo = ->
-    unless $scope.todoInput is ""
-      $scope.todos.push title: $scope.todoInput, done: false
+  chrome.storage.local.get 'todolist', (value) ->
+    $scope.$apply -> $scope.load value
+
+  $scope.save = -> chrome.storage.local.set todolist: $scope.todos
+
+  $scope.load = (value) ->
+    if value and value.todolist
+      $scope.todos = value.todolist
+    else
+      $scope.todos = []
+      $scope.addTodo "Build Workify"
+      $scope.addTodo "Make workify save to chrome localstorage"
+      $scope.addTodo "Make workify block pages"
+      $scope.addTodo "Pass exams"
+      $scope.addTodo "Learn WebGL"
+      $scope.save()
+
+  $scope.nextid = 0
+
+  $scope.addTodo = (title) ->
+    if title?
+      $scope.todos.push title: title, done: false, id: $scope.nextid++
       $scope.todoInput = ""
+      $scope.save()
+
+  return

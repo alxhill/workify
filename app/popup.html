@@ -8,11 +8,11 @@
 
     <div id="todo-list" ng-controller="TodoCtrl">
         <div ng-repeat="todo in todos">
-            <input type="checkbox" ng-model="todo.done">
-            <span class="done-{{todo.done}}">{{todo.title}}</span>
+            <input type="checkbox" id="done-{{todo.id}}" ng-model="todo.done" ng-click="save()">
+            <label class="done-{{todo.done}}" for="done-{{todo.id}}">{{todo.title}}</label>
         </div>
-        <form ng-submit="addTodo()" class="pure-form">
-            <input type="text" ng-model="todoInput" placeholder="Add a project">
+        <form ng-submit="addTodo(todoInput)" class="pure-form">
+            <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
             <button type="submit" class="pure-button pure-button-primary">Add</button>
         </form>
     </div>
