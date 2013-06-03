@@ -21,7 +21,11 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
   $scope.addTodo = (title) ->
     if title?
-      $scope.todos.push title: title, done: false, id: $scope.nextid++
+      if angular.isArray(title)
+        $scope.todos.concat _.map (el) -> _.extend el, done: false, id: $scope.nextid++
+      else
+        $scope.todos.push title: title, done: false, id: $scope.nextid++
+
       $scope.todoInput = ""
       $scope.save()
 
