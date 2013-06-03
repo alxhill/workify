@@ -1,4 +1,4 @@
-TodoCtrl = ($scope) ->
+angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
   chrome.storage.local.get 'todolist', (value) ->
     $scope.$apply -> $scope.load value
