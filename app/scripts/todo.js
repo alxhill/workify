@@ -11,19 +11,16 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
     });
   };
   $scope.load = function(value) {
-    if (value && value.todolist) {
-      return $scope.todos = value.todolist;
+    if (value && value.todolist.length > 0) {
+      $scope.todos = value.todolist;
+      return $scope.nextid = $scope.todos.length;
     } else {
       $scope.todos = [];
-      $scope.addTodo("Build Workify");
-      $scope.addTodo("Make workify save to chrome localstorage");
-      $scope.addTodo("Make workify block pages");
-      $scope.addTodo("Pass exams");
-      $scope.addTodo("Learn WebGL");
+      $scope.nextid = 0;
+      $scope.addTodo(["Build Workify", "Make workify save to chrome localstorage", "Make workify block pages", "Pass exams", "Learn WebGL"]);
       return $scope.save();
     }
   };
-  $scope.nextid = 0;
   $scope.addTodo = function(title) {
     if (title != null) {
       if (angular.isArray(title)) {

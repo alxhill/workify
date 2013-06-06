@@ -7,11 +7,15 @@
     "16": "icon-16.png",
     "128": "icon-128.png"
   },
+  "background": {
+    "scripts": ["event.js"],
+    "persistent": false
+  },
   "default_locale": "en",
   "permissions": ["storage", "tabs", "http://*/*", "https://*/*"],
   "browser_action": {
     "default_icon": "icon-16.png",
     "default_popup": "popup.html",
-    "default_title": "workify"
+    "default_title": "Workify"
   }
 }

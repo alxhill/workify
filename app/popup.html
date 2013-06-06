@@ -17,9 +17,16 @@
         </form>
     </div>
 
+    <div id="blocker" ng-controller="BlockCtrl">
+        <p ng-show="blocked">This page is currently blocked.</p>
+        <p ng-hide="blocked">This page is not blocked.</p>
+        <form ng-submit="toggle()"><button type="submit" class="pure-button pure-button-primary">Block this page</button></form>
+    </div>
+
     <script src="components/lodash/dist/lodash.min.js"></script>
     <script src="components/angular/angular.js"></script>
-    <script src="app.js"></script>
-    <script src="todo.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/todo.js"></script>
+    <script src="scripts/block.js"></script>
 </body>
 </html>

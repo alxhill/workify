@@ -6,18 +6,21 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
   $scope.save = -> chrome.storage.local.set todolist: $scope.todos
 
   $scope.load = (value) ->
-    if value and value.todolist
+    if value and value.todolist.length > 0
       $scope.todos = value.todolist
+      $scope.nextid = $scope.todos.length
     else
       $scope.todos = []
-      $scope.addTodo "Build Workify"
-      $scope.addTodo "Make workify save to chrome localstorage"
-      $scope.addTodo "Make workify block pages"
-      $scope.addTodo "Pass exams"
-      $scope.addTodo "Learn WebGL"
+      $scope.nextid = 0
+      $scope.addTodo [
+        "Build Workify",
+        "Make workify save to chrome localstorage",
+        "Make workify block pages",
+        "Pass exams",
+        "Learn WebGL"
+      ]
       $scope.save()
 
-  $scope.nextid = 0
 
   $scope.addTodo = (title) ->
     if title?
