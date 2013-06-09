@@ -1,9 +1,31 @@
+bannedUrls = ["apple", "10fastfingers"]
+
 block = (tab) ->
-  if tab.url.match /facebook/
-    chrome.tabs.remove tab.id
-    chrome.tabs.create url: chrome.runtime.getURL "block.html"
+  chrome.tabs.update tab.id, url: chrome.runtime.getURL("block.html"), (newTab) ->
+    console.log tab.id, ' to ', newTab.id
+    return
+  return
 
-chrome.tabs.onUpdated.addListener (id, change_info, tab) -> block tab
+shouldBlock = (tabUrl) ->
+  for url in bannedUrls
+    if tabUrl.match RegExp(url)
+      return true
 
-chrome.tabs.onReplaced.addListener (new_id, old_id) ->
-  chrome.tabs.get new_id, (tab) -> block tab
+  return false
+
+chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
+  if shouldBlock tab.url
+    block tab
+
+chrome.tabs.onReplaced.addListener (newId, oldId) ->
+  chrome.tabs.get newId, (tab) ->
+    if shouldBlock tab.url
+      block tab
+
+# cb = (e) ->
+#   console.log e
+#   if e.tabId
+#     chrome.tabs.update e.tabId, url: chrome.runtime.getURL("block.html"), (newTab) ->
+#       console.log newTab
+#       return
+#   return

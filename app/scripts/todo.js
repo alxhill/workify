@@ -15,8 +15,8 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
       $scope.todos = value.todolist;
       return $scope.nextid = $scope.todos.length;
     } else {
-      $scope.todos = [];
       $scope.nextid = 0;
+      $scope.todos = [];
       $scope.addTodo(["Build Workify", "Make workify save to chrome localstorage", "Make workify block pages", "Pass exams", "Learn WebGL"]);
       return $scope.save();
     }

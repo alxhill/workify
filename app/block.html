@@ -1,9 +1,14 @@
-<html>
-<head>
-    <title>Page Blocked</title>
-</head>
-<body>
-    <h1>NO PAGE FOR YOU</h1>
-    <p>Page will be back in x seconds.</p>
-</body>
+<html ng-app='workify' ng-csp>
+    <head>
+        <title>Page Blocked</title>
+        <script src="components/angular/angular.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/blocker.js"></script>
+    </head>
+    <body>
+        <div id="blocked" ng-controller="BlockerCtrl">
+            <h1>Workify has blocked this page for {{remaining}} seconds.</h1>
+            <p ng-hide="remaining">Page unblocked!</p>
+        </div>
+    </body>
 </html>

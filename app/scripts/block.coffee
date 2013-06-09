@@ -1,4 +1,4 @@
-angular.module('workify').controller 'BlockCtrl', ($scope, $window) ->
+angular.module('workify').controller 'BlockCtrl', ($scope) ->
 
   $scope.blocked = false
 

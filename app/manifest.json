@@ -12,10 +12,11 @@
     "persistent": false
   },
   "default_locale": "en",
-  "permissions": ["storage", "tabs", "http://*/*", "https://*/*"],
+  "permissions": ["storage", "tabs", "webNavigation", "http://*/*", "https://*/*"],
   "browser_action": {
     "default_icon": "icon-16.png",
     "default_popup": "popup.html",
     "default_title": "Workify"
-  }
+  },
+  "manifest_version": 2
 }
