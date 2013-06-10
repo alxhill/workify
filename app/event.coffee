@@ -1,30 +1,36 @@
-bannedUrls = ["apple", "10fastfingers"]
+bannedUrls = ["apple.com", "10fastfingers.com"]
+restoreUrl = {} # map of tab id to url to restore
+safeTabs = [] # tabs that are allowed to be on banned pages
 
-block = (tab) -> chrome.tabs.update tab.id, url: chrome.runtime.getURL("block.html")
+# the a tag can parse out the hostname (and other properties) of a url.
+urlParser = document.createElement 'a'
 
-shouldBlock = (tabUrl) ->
+block = (tab) ->
+  chrome.tabs.update tab.id, url: chrome.runtime.getURL("block.html"), (newTab) ->
+    restoreUrl[newTab.id] = tab.url
+
+shouldBlock = (tab) ->
   for url in bannedUrls
-    if tabUrl.match RegExp(url)
-      return true
+    if tab.id not of restoreUrl and tab.id not in safeTabs
+      urlParser.href = tab.url
+      if urlParser.hostname in bannedUrls
+        return true
   return false
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
-  if shouldBlock tab.url
-    block tab
+  if shouldBlock tab then block tab
 
 chrome.tabs.onReplaced.addListener (newId, oldId) ->
-  chrome.tabs.get newId, (tab) ->
-    if shouldBlock tab.url
-      block tab
+  if oldId in safeTabs
+    delete safeTabs[oldId]
+    safeTabs.push newId
+  else
+    chrome.tabs.get newId, (tab) -> if shouldBlock tab then block tab
 
-chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
-  console.log message
+chrome.tabs.onRemoved.addListener (id) -> if id in safeTabs then safeTabs.splice(safeTabs.indexOf(id), 1)
 
-
-# cb = (e) ->
-#   console.log e
-#   if e.tabId
-#     chrome.tabs.update e.tabId, url: chrome.runtime.getURL("block.html"), (newTab) ->
-#       console.log newTab
-#       return
-#   return
+chrome.runtime.onMessage.addListener (msg, {tab}, sendResponse) ->
+  if msg is "unblock"
+    chrome.tabs.update tab.id, url: restoreUrl[tab.id], (newTab) ->
+      delete restoreUrl[tab.id]
+      safeTabs.push newTab.id

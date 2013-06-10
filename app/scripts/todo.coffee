@@ -1,6 +1,6 @@
 angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
-  chrome.runtime.onMessage.addListener (msg, {tab}) ->
+  chrome.runtime.onMessage.addListener (msg) ->
     if msg is "updateList"
       chrome.storage.local.get 'todolist', (value) ->
         $scope.$apply -> $scope.load value
@@ -15,18 +15,6 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
     if value and value.todolist?.length > 0
       $scope.todos = value.todolist
       $scope.nextid = $scope.todos.length
-    # else
-    #   $scope.nextid = 0
-    #   $scope.todos = []
-    #   $scope.addTodo [
-    #     "Build Workify",
-    #     "Make workify save to chrome localstorage",
-    #     "Make workify block pages",
-    #     "Pass exams",
-    #     "Learn WebGL"
-    #   ]
-    #   $scope.save()
-
 
   $scope.addTodo = (title) ->
     if title?
