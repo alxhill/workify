@@ -1,16 +1,11 @@
 bannedUrls = ["apple", "10fastfingers"]
 
-block = (tab) ->
-  chrome.tabs.update tab.id, url: chrome.runtime.getURL("block.html"), (newTab) ->
-    console.log tab.id, ' to ', newTab.id
-    return
-  return
+block = (tab) -> chrome.tabs.update tab.id, url: chrome.runtime.getURL("block.html")
 
 shouldBlock = (tabUrl) ->
   for url in bannedUrls
     if tabUrl.match RegExp(url)
       return true
-
   return false
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
@@ -21,6 +16,10 @@ chrome.tabs.onReplaced.addListener (newId, oldId) ->
   chrome.tabs.get newId, (tab) ->
     if shouldBlock tab.url
       block tab
+
+chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
+  console.log message
+
 
 # cb = (e) ->
 #   console.log e
