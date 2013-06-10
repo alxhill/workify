@@ -44,4 +44,14 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
       return $scope.save();
     }
   };
+  $scope.clearComplete = function() {
+    return $scope.todos = _.where($scope.todos, {
+      done: false
+    });
+  };
+  $scope.remove = function(id) {
+    return $scope.todos = _.reject($scope.todos, function(el) {
+      return el.id === id;
+    });
+  };
 });

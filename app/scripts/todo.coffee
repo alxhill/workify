@@ -26,4 +26,10 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
       $scope.todoInput = ""
       $scope.save()
 
+  $scope.clearComplete = ->
+    $scope.todos = _.where $scope.todos, done: false
+
+  $scope.remove = (id) ->
+    $scope.todos = _.reject $scope.todos, (el) -> el.id is id
+
   return
