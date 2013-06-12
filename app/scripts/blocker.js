@@ -4,7 +4,7 @@ angular.module('workify').controller('BlockerCtrl', function($scope, $timeout) {
   $scope.remaining = 5;
   return timeout = $timeout(function() {
     $scope.done = true;
-    console.log('timer done. This would return to the original page if I\'d written that bit yet');
-    return chrome.runtime.sendMessage("unblock");
+    console.log("timer done. This would return to the original page if I'd written that bit yet");
+    return chrome.runtime.sendMessage('unblock');
   }, $scope.remaining * 1000);
 });

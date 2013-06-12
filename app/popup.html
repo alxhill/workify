@@ -9,8 +9,8 @@
     <div id="todo-list" ng-controller="TodoCtrl">
         <a href="" ng-click="clearComplete()">clear complete</a>
         <div ng-repeat="todo in todos">
-            <input type="checkbox" id="done-{{todo.id}}" ng-model="todo.done" ng-click="save()">
-            <label class="done-{{todo.done}}" for="done-{{todo.id}}">{{todo.title}}</label>
+            <input type="checkbox" id="done-{{todo.id}}" class="todo-list" ng-model="todo.done" ng-click="save()">
+            <label class="done-{{todo.done}} todo-label" for="done-{{todo.id}}">{{todo.title}}</label>
             <!-- This button looked awful, but I'll probably add something similar back in. -->
             <!-- <button ng-click="remove(todo.id)">x</button> -->
         </div>

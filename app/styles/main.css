@@ -6,3 +6,8 @@ body {
 .done-true {
     text-decoration: line-through;
 }
+
+.todo-label {
+    -webkit-user-select: none;
+    user-select: none;
+}

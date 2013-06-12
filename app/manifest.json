@@ -4,8 +4,8 @@
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
-    "16": "icon-16.png",
-    "128": "icon-128.png"
+    "16": "icons/icon-16.png",
+    "128": "icons/icon-128.png"
   },
   "background": {
     "scripts": ["event.js"],
@@ -14,9 +14,12 @@
   "default_locale": "en",
   "permissions": ["storage", "tabs", "webNavigation", "http://*/*", "https://*/*"],
   "browser_action": {
-    "default_icon": "icon-16.png",
+    "default_icon":
+    {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-19.png"
+    },
     "default_popup": "popup.html",
     "default_title": "Workify"
-  },
-  "manifest_version": 2
+  }
 }
