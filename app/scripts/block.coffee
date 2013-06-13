@@ -1,16 +1,24 @@
 angular.module('workify').controller 'BlockCtrl', ($scope) ->
 
+  Tab = null
+  url = null
+  chrome.runtime.getBackgroundPage (bg) ->
+    Tab = bg.Tab
+    chrome.tabs.query active: true, windowType: 'normal', (tabs) ->
+      tab = tabs[0]
+      url = tab.url
+      Tab.inBlocklist tab.url, ->
+        $scope.$apply -> $scope.blocked = true
+
   $scope.blocked = false
 
-  # this should be done based on the chrome.tabs.onMoved event
-  # and using the url from the tab
-  # chrome.storage.local.get 'blocklist', ({blocklist}) ->
-  #   urlParser = document.createElement 'a'
-  #   urlParser.href = window.location.href
-  #   $scoped.blocked = urlParser.hostname in blocklist
-
-
+  # it's pretty bad to assume the variables are set, but making it not like
+  # this is significantly more complex. So meh.
   $scope.toggle = ->
+    if $scope.blocked
+      Tab.addToBlocklist url
+    else
+      Tab.removeFromBlocklist url
     $scope.blocked = not $scope.blocked
 
   return

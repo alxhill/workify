@@ -12,7 +12,7 @@
     "persistent": false
   },
   "default_locale": "en",
-  "permissions": ["storage", "tabs", "webNavigation", "http://*/*", "https://*/*"],
+  "permissions": ["storage", "tabs", "http://*/*", "https://*/*"],
   "browser_action": {
     "default_icon":
     {

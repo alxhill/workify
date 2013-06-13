@@ -23,7 +23,10 @@
     <div id="blocker" ng-controller="BlockCtrl">
         <p ng-show="blocked">This page is currently blocked.</p>
         <p ng-hide="blocked">This page is not blocked.</p>
-        <form ng-submit="toggle()"><button type="submit" class="pure-button pure-button-primary">Block this page</button></form>
+        <form ng-submit="toggle()">
+            <button type="submit" ng-hide="blocked" class="pure-button pure-button-primary">Block this page</button>
+            <button type="submit" ng-show="blocked" class="pure-button pure-button-primary">Unblock this page</button>
+        </form>
     </div>
 
     <script src="components/lodash/dist/lodash.min.js"></script>

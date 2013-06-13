@@ -1,11 +1,11 @@
-# just because typing chrome.storage.local every time is a pain in the arse
+# just because typing chrome.storage.local every time is a pain
 get = (name, cb) -> chrome.storage.local.get name, cb
 set = (obj) -> chrome.storage.local.set obj
 
 # set up the basic backend objects for workify
 chrome.runtime.onInstalled.addListener ->
   set
-    blocklist: ["apple.com", "10fastfingers.com"]
+    blocklist: ["reddit.com", "10fastfingers.com", "facebook.com", "news.ycombinator.com"]
     restoreUrl: {}
     safeTabs: []
     todolist: [
@@ -22,31 +22,65 @@ chrome.runtime.onInstalled.addListener ->
       id: 2
     ]
 
-# the <a> tag can parse out the hostname (and other properties) of a url.
-urlParser = document.createElement 'a'
+### Functions for dealing with tabs and urls ###
 
-# simple function to replace the contents of tab with the workify block page
-block = (tab) ->
-  chrome.tabs.update tab.id, url: chrome.runtime.getURL('block.html'), (newTab) ->
+Tab =
+  normaliseUrl: (url) ->
+    # the <a> tag can parse out the hostname (and other properties) of a url.
+    urlParser = document.createElement 'a'
+    urlParser.href = url
+    # match both site.com and www.site.com
+    host = urlParser.hostname.match(/(www\.)?(.*)/)?[2]
+    return host
+
+  block: (tab) ->
+    chrome.tabs.update tab.id, url: chrome.runtime.getURL('block.html'), (newTab) ->
+      get 'restoreUrl', ({restoreUrl}) ->
+        restoreUrl[newTab.id] = tab.url
+        set restoreUrl: restoreUrl
+
+  unblock: (tab) ->
     get 'restoreUrl', ({restoreUrl}) ->
-      restoreUrl[newTab.id] = tab.url
-      set restoreUrl: restoreUrl
+      chrome.tabs.update tab.id, url: restoreUrl[tab.id], (newTab) ->
+        delete restoreUrl[tab.id]
+        set restoreUrl: restoreUrl
+        get 'safeTabs', ({safeTabs}) ->
+          safeTabs.push newTab.id
+          set safeTabs: safeTabs
 
-# work out if a page should be blocked, then execute a callback with the result
-shouldBlock = (tab, cb) ->
-  get 'blocklist', ({blocklist}) ->
+  # work out if a page should be blocked, then execute a callback with the result
+  shouldBlock: (tab, cb) ->
     get 'restoreUrl', ({restoreUrl}) ->
       get 'safeTabs', ({safeTabs}) ->
         blockTab = false
-        for url in blocklist
+        Tab.inBlocklist tab.url, ->
           if tab.id not of restoreUrl and tab.id not in safeTabs
-            urlParser.href = tab.url
-            if urlParser.hostname in blocklist
-              blockTab = true
-        cb blockTab
+            blockTab = true
+          cb.call Tab, blockTab
+
+  addToBlocklist: (url) ->
+    host = Tab.normaliseUrl url
+    get 'blocklist', ({blocklist}) ->
+      blocklist.push host
+      set blocklist: blocklist
+
+  removeFromBlocklist: (url) ->
+    host = Tab.normaliseUrl url
+    get 'blocklist', ({blocklist}) ->
+      if host in blocklist
+        blocklist.splice(blocklist.indexOf(host), 1)
+      set blocklist: blocklist
+
+  # execute a callback if the url should be blocked
+  inBlocklist: (url, cb) ->
+    host = Tab.normaliseUrl url
+    get 'blocklist', ({blocklist}) ->
+      if host in blocklist then cb()
+
+### Listen to chrome.tabs events ###
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
-  shouldBlock tab, (blk) -> if blk then block tab
+  Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
 
 chrome.tabs.onReplaced.addListener (newId, oldId) ->
   get 'safeTabs', ({safeTabs}) ->
@@ -55,7 +89,7 @@ chrome.tabs.onReplaced.addListener (newId, oldId) ->
       safeTabs.push newId
       set safeTabs: safeTabs
     else
-      chrome.tabs.get newId, (tab) -> shouldBlock tab, (blk) -> if blk then block tab
+      chrome.tabs.get newId, (tab) -> Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
 
 # take a tab out of the
 chrome.tabs.onRemoved.addListener (id) ->
@@ -64,14 +98,11 @@ chrome.tabs.onRemoved.addListener (id) ->
       safeTabs.splice(safeTabs.indexOf(id), 1)
       set safeTabs: safeTabs
 
-# unblocks a page on receiving the 'unblock' message from the script
+# allows access to the BlockMananger functions through messaging
 chrome.runtime.onMessage.addListener (msg, {tab}, sendResponse) ->
-  if msg is 'unblock'
-    get 'restoreUrl', ({restoreUrl}) ->
-      console.log 'unblocking page with url', restoreUrl[tab.id]
-      chrome.tabs.update tab.id, url: restoreUrl[tab.id], (newTab) ->
-        delete restoreUrl[tab.id]
-        set restoreUrl: restoreUrl
-        get 'safeTabs', ({safeTabs}) ->
-          safeTabs.push newTab.id
-          set safeTabs: safeTabs
+  if msg.method?
+    msg.args ?= []
+    msg.args.push sendResponse # for functions that take a callback
+    Tab[msg.method].apply Tab, msg.args
+    # onMessage must return true if the sendResponse is to be used
+    return msg.method in ["shouldBlock", "inBlocklist"]
