@@ -79,6 +79,13 @@ Tab =
 
 ### Listen to chrome.tabs events ###
 
+chrome.tabs.onCreated.addListener (tab) ->
+  get 'safeTabs', ({safeTabs}) ->
+    console.log tab
+    if tab.openerTabId? and tab.openerTabId in safeTabs
+      safeTabs.push tab.id
+      set safeTabs: safeTabs
+
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
   Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
 
@@ -91,14 +98,15 @@ chrome.tabs.onReplaced.addListener (newId, oldId) ->
     else
       chrome.tabs.get newId, (tab) -> Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
 
-# take a tab out of the
+# take a tab out of the safeTabs array
 chrome.tabs.onRemoved.addListener (id) ->
   get 'safeTabs', ({safeTabs}) ->
     if id in safeTabs
       safeTabs.splice(safeTabs.indexOf(id), 1)
       set safeTabs: safeTabs
 
-# allows access to the BlockMananger functions through messaging
+# Allows access to the Tab functions through messaging.
+# May be removed in a later release to be replaced with getBackgroundPage
 chrome.runtime.onMessage.addListener (msg, {tab}, sendResponse) ->
   if msg.method?
     msg.args ?= []

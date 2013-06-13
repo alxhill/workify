@@ -1,6 +1,6 @@
 angular.module('workify').controller 'BlockerCtrl', ($scope, $timeout) ->
 
-  $scope.remaining = 30
+  $scope.remaining = 5
   $scope.done = false
 
   timeout = $timeout timefunc = ->

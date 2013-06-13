@@ -18,3 +18,5 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
     * Based on the pomodoro technique?
 
 Currently, only the first two items on the list are implemented.
+
+## Requirements List
