@@ -8,6 +8,8 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
 
 * Delay before showing site
 * Show a to do list or a reading list where the page would be
+    * Could integrate with a site like Pocket and/or Trello
+    * Split into high and low energy tasks
 * Track how long you've spent on certain sites
 * Alert you after a certain amount of time on an unproductive site
 * Show you how much you could have made on minimum wage during that time?
@@ -16,7 +18,14 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
     * Permanently blocks certain sites
     * Allows time limited access to other sites
     * Based on the pomodoro technique?
+* Replace default new tab page with list
 
-Currently, only the first two items on the list are implemented.
+## To do list
 
-## Requirements List
+### Micro
+* Style the block and popup pages
+* Split the to do list into high and low energy
+
+### Macro
+* Track time spent on a site
+* Perma-blocking

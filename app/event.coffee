@@ -48,7 +48,8 @@ Tab =
           safeTabs.push newTab.id
           set safeTabs: safeTabs
 
-  # work out if a page should be blocked, then execute a callback with the result
+  # work out if a page should be blocked, then execute a callback with the result.
+  # differs from inBlocklist as it checks if the page is safe or currently blocked
   shouldBlock: (tab, cb) ->
     get 'restoreUrl', ({restoreUrl}) ->
       get 'safeTabs', ({safeTabs}) ->
@@ -69,7 +70,7 @@ Tab =
     get 'blocklist', ({blocklist}) ->
       if host in blocklist
         blocklist.splice(blocklist.indexOf(host), 1)
-      set blocklist: blocklist
+        set blocklist: blocklist
 
   # execute a callback if the url should be blocked
   inBlocklist: (url, cb) ->
