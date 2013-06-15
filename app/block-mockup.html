@@ -7,7 +7,7 @@
     <body>
         <header>
             <h1>You should get back to work.</h1>
-            <h2>But if you're struggling with that, here are some productive things to do:</h2>
+            <h2>But if you're struggling, here are some productive things to do:</h2>
         </header>
 
         <div id="todo-lists" class="pure-g-r">
@@ -28,11 +28,11 @@
                     </div>
                     <div class="todo">
                         <input type="checkbox" id="todo-4">
-                        <label for="todo-4">Make a JS compiler</label>
+                        <label for="todo-4">Make a JavaScript compiler</label>
                     </div>
-                    <form ng-submit="addTodo(todoInput)">
-                        <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
-                        <button type="submit" class="pure-button">Add</button>
+                    <form ng-submit="addTodo(todoInput)" class="pure-g-r">
+                        <input class="pure-u-4-5" type="text" ng-model="todoInput" placeholder="Add a project">
+                        <button type="submit" class="pure-button pure-u-1-5">Add</button>
                     </form>
                 </div>
             </div>
@@ -60,9 +60,9 @@
                         <input type="checkbox" id="todo-9">
                         <label for="todo-9">Learn marketing basics</label>
                     </div>
-                    <form ng-submit="addTodo(todoInput)">
-                        <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
-                        <button type="submit" class="pure-button">Add</button>
+                    <form ng-submit="addTodo(todoInput)" class="pure-g-r">
+                        <input class="pure-u-4-5" type="text" ng-model="todoInput" placeholder="Add a project">
+                        <button type="submit" class="pure-button pure-u-1-5">Add</button>
                     </form>
                 </div>
             </div>

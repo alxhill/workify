@@ -5,42 +5,75 @@
 }
 
 @label-font-size: 1.2*@font-size;
-
-.todo label {
-    font-size: @label-font-size;
-    -webkit-user-select: none;
-    user-select: none;
-}
+@todo-border-radius: 10px;
 
 .todo-list {
     color: white;
     h3 {
-        font-size: 1.5*@font-size;
+        font-size: 1.7*@font-size;
         text-align: center;
         margin-top: 0;
     }
     .todo-list-wrapper {
         padding: 5%;
         background-color: @wet-asphalt;
-        border-radius: 10px;
+        border-radius: @todo-border-radius;
     }
 
     .todo {
         padding: 10px 0;
+        label {
+            font-size: @label-font-size;
+            -webkit-user-select: none;
+            user-select: none;
+            padding-left: 10px;
+        }
+
+        input[type=checkbox] {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url(../images/checkbox-blank.png);
+            &:checked {
+                background-image: url(../images/checkbox-checked.png);
+            }
+        }
     }
 
     form {
-        input[type=text] {
-            width: 80%;
-        }
+        @input-height: 37px;
 
+        padding-top: 10px;
+
+        input[type=text] {
+            &:focus {
+                border: none;
+                box-shadow: none;
+                outline-width: 0;
+            }
+            font-family: inherit;
+            border-top-left-radius: @todo-border-radius;
+            border-bottom-left-radius: @todo-border-radius;
+            border: none !important;
+            height: @input-height;
+            -webkit-appearance: none;
+            padding-left: 10px;
+        }
         button {
+            height: @input-height;
+            font-family: inherit;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: @todo-border-radius;
+            border-top-right-radius: @todo-border-radius;
             font-family: @font-family;
             font-size: @label-font-size;
             font-weight: bold;
             background-color: @emerland;
             color: white;
-            // width: 15%;
+            border: none !important;
         }
     }
 }
