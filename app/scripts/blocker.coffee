@@ -1,3 +1,5 @@
+"use strict"
+
 angular.module('workify').controller 'BlockerCtrl', ($scope, $timeout) ->
 
   $scope.remaining = 30

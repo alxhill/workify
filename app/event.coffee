@@ -1,3 +1,5 @@
+"use strict"
+
 # just because typing chrome.storage.local every time is a pain
 get = (name, cb) -> chrome.storage.local.get name, cb
 set = (obj) -> chrome.storage.local.set obj

@@ -1,13 +1,11 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 body {
-    min-width: 400px;
+  min-width: 400px;
 }
-
 .done-true {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
-
-.todo-label {
-    -webkit-user-select: none;
-    user-select: none;
+.todo label {
+  -webkit-user-select: none;
+  user-select: none;
 }

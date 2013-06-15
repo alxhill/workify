@@ -1,6 +1,7 @@
 <html ng-app="workify" ng-csp>
 <head>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/flat-ui.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -9,14 +10,16 @@
     <div id="todo-list" ng-controller="TodoCtrl">
         <a href="" ng-click="clearComplete()">clear complete</a>
         <div ng-repeat="todo in todos">
-            <input type="checkbox" id="done-{{todo.id}}" class="todo-list" ng-model="todo.done" ng-click="save()">
-            <label class="done-{{todo.done}} todo-label" for="done-{{todo.id}}">{{todo.title}}</label>
+            <label class="todo-label" for="done-{{todo.id}}">
+            <input type="checkbox" id="done-{{todo.id}}" class="todo-list checkbox" ng-model="todo.done" ng-click="save()">
+                {{todo.title}}
+            </label>
             <!-- This button looked awful, but I'll probably add something similar back in. -->
             <!-- <button ng-click="remove(todo.id)">x</button> -->
         </div>
-        <form ng-submit="addTodo(todoInput)" class="pure-form">
+        <form ng-submit="addTodo(todoInput)">
             <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
-            <button type="submit" class="pure-button pure-button-primary">Add</button>
+            <button type="submit" class="Btn btn-primary">Add</button>
         </form>
     </div>
 
@@ -24,8 +27,8 @@
         <p ng-show="blocked">This page is currently blocked.</p>
         <p ng-hide="blocked">This page is not blocked.</p>
         <form ng-submit="toggle()">
-            <button type="submit" ng-hide="blocked" class="pure-button pure-button-primary">Block this page</button>
-            <button type="submit" ng-show="blocked" class="pure-button pure-button-primary">Unblock this page</button>
+            <button type="submit" ng-hide="blocked" class="btn btn-primary">Block this page</button>
+            <button type="submit" ng-show="blocked" class="btn btn-primary">Unblock this page</button>
         </form>
     </div>
 

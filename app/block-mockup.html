@@ -1,0 +1,77 @@
+<html ng-app='workify' ng-csp>
+    <head>
+        <title>Page Blocked</title>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
+        <link rel="stylesheet" href="styles/block.css">
+    </head>
+    <body>
+        <header>
+            <h1>You should get back to work.</h1>
+            <h2>But if you're struggling with that, here are some productive things to do:</h2>
+        </header>
+
+        <div id="todo-lists" class="pure-g-r">
+            <div class="todo-list high-energy pure-u-1-2">
+                <div class="todo-list-wrapper">
+                    <h3>High Energy Tasks</h3>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-1">
+                        <label for="todo-1">Build Workify</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-2">
+                        <label for="todo-2">Make a HN iOS 7 app</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-3">
+                        <label for="todo-3">Work on JobFoundry outcomes mockup</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-4">
+                        <label for="todo-4">Make a JS compiler</label>
+                    </div>
+                    <form ng-submit="addTodo(todoInput)">
+                        <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
+                        <button type="submit" class="pure-button">Add</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="todo-list low-energy pure-u-1-2">
+                <div class="todo-list-wrapper">
+                    <h3>Low Energy Tasks</h3>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-5">
+                        <label for="todo-5">Read Sal Kahn's book on education</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-6">
+                        <label for="todo-6">Learn WebGL and OpenGL basics</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-7">
+                        <label for="todo-7">Improve the Workify logo</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-8">
+                        <label for="todo-8">Learn about creating parsers and lexers</label>
+                    </div>
+                    <div class="todo">
+                        <input type="checkbox" id="todo-9">
+                        <label for="todo-9">Learn marketing basics</label>
+                    </div>
+                    <form ng-submit="addTodo(todoInput)">
+                        <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
+                        <button type="submit" class="pure-button">Add</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- <div ng-repeat="todo in todos">
+                <input type="checkbox" id="done-{{todo.id}}" ng-model="todo.done" ng-click="save()">
+                <label class="done-{{todo.done}} todo-label" for="done-{{todo.id}}">{{todo.title}}</label>
+            </div> -->
+        </div>
+
+    </body>
+</html>

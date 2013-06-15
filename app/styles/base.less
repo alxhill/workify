@@ -1,0 +1,58 @@
+// Basic colors and font settings
+@turquoise:     #1abc9c;
+@green-sea:     #16a085;
+
+@emerland:      #2ecc71;
+@nephritis:     #27ae60;
+
+@peter-river:   #3498db;
+@belize-hole:   #2980b9;
+
+@amethyst:      #9b59b6;
+@wisteria:      #8e44ad;
+
+@wet-asphalt:   #34495e;
+@midnight-blue: #2c3e50;
+
+@sun-flower:    #f1c40f;
+@orange:        #f39c12;
+
+@carrot:        #e67e22;
+@pumpkin:       #d35400;
+
+@alizarin:      #e74c3c;
+@pomegranate:   #c0392b;
+
+@clouds:        #ecf0f1;
+@silver:        #bdc3c7;
+
+@concrete:      #95a5a6;
+@asbestos:      #7f8c8d;
+
+@font-family: "Lato", sans-serif;
+@font-size: 14px;
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,400italic,300");
+
+@text-color: @midnight-blue;
+@link-color: @green-sea;
+@link-color-hover: @turquoise;
+
+body {
+    color: @text-color;
+    font-family: @font-family;
+    font-size: @font-size;
+    line-height: 1.231;
+    background-color: @clouds;
+}
+
+a {
+  color: @link-color;
+  text-decoration: underline;
+
+  &:hover {
+    color: @link-color-hover;
+    text-decoration: none;
+  }
+}
+

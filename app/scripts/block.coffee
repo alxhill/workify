@@ -1,7 +1,10 @@
+"use strict"
+
 angular.module('workify').controller 'BlockCtrl', ($scope) ->
 
   Tab = null
   url = null
+
   chrome.runtime.getBackgroundPage (bg) ->
     Tab = bg.Tab
     chrome.tabs.query active: true, windowType: 'normal', (tabs) ->
@@ -12,10 +15,10 @@ angular.module('workify').controller 'BlockCtrl', ($scope) ->
 
   $scope.blocked = false
 
-  # it's pretty bad to assume the variables are set, but making it not like
-  # this is significantly more complex. So meh.
+  # this probably shouldn't assume the variables are set, but making it not
+  # is significantly more complex. So meh.
   $scope.toggle = ->
-    if $scope.blocked
+    if not $scope.blocked
       Tab.addToBlocklist url
     else
       Tab.removeFromBlocklist url

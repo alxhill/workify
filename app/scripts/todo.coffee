@@ -1,3 +1,5 @@
+"use strict"
+
 angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
   chrome.runtime.onMessage.addListener (msg) ->
@@ -28,6 +30,7 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
   $scope.clearComplete = ->
     $scope.todos = _.where $scope.todos, done: false
+    $scope.save()
 
   $scope.remove = (id) ->
     $scope.todos = _.reject $scope.todos, (el) -> el.id is id
