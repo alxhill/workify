@@ -112,9 +112,8 @@ body {
   background-color: #34495e;
   min-width: 400px;
 }
-h1 {
-  text-align: center;
-  color: white;
+.todo-list {
+  padding-bottom: 40px;
 }
 form.add-task input[type=text].add-input {
   width: 100%;
@@ -133,11 +132,40 @@ form.add-task .add-high, form.add-task .add-low {
 form.add-task .add-high {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 0;
-  background-color: #f1c40f;
+  background-color: #2980b9;
 }
 form.add-task .add-low {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 0;
+  background-color: #27ae60;
+}
+#blocker {
+  color: white;
+}
+#blocker .block-form button {
+  width: 100%;
+  font-size: 21px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-radius: 0;
+}
+#blocker .block-form .block-button {
+  background-color: #3498db;
+}
+#blocker .block-form .unblock-button {
+  background-color: #c0392b;
+}
+.done-dot {
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  border-radius: 7px;
+  display: inline-block;
+}
+.done-dot.done-dot-high {
+  background-color: #2980b9;
+}
+.done-dot.done-dot-low {
   background-color: #27ae60;
 }
 .energy-high {

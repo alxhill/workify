@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "workify",
+    "message": "Workify",
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Workify for Chrome",
+    "message": "Delays loading addictive sites and overlays a list of other things you want to get done.",
     "description": "The description of the application"
   }
 }

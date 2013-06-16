@@ -6,12 +6,11 @@ body {
     min-width: 400px;
 }
 
-h1 {
-    text-align: center;
-    color: white;
-}
-
 @input-radius: 10px;
+
+.todo-list {
+    padding-bottom: 40px;
+}
 
 form.add-task {
     input[type=text].add-input {
@@ -33,16 +32,55 @@ form.add-task {
     .add-high {
         border-bottom-left-radius: @input-radius;
         border-bottom-right-radius: 0;
-        background-color:@sun-flower;
+        background-color:@high-color;
     }
 
     .add-low {
         border-bottom-right-radius: @input-radius;
         border-bottom-left-radius: 0;
-        background-color: @nephritis;
+        background-color: @low-color;
     }
 }
 
+#blocker {
+    color: white;
+    .block-form {
+        button {
+            width: 100%;
+            font-size: 1.5*@font-size;
+            // height: 40px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-radius: 0;
+        }
+
+        .block-button {
+            background-color: @peter-river;
+        }
+
+        .unblock-button {
+            background-color: @pomegranate;
+        }
+    }
+}
+
+
+@dot-size: 14px;
+.done-dot {
+    width: @dot-size;
+    height: @dot-size;
+    margin-right: 10px;
+    border-radius: @dot-size/2;
+    display: inline-block;
+
+    &.done-dot-high {
+        background-color: @high-color;
+    }
+
+    &.done-dot-low {
+        background-color: @low-color;
+    }
+}
 .energy-high {
     background-color: @emerland;
 }

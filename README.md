@@ -32,11 +32,10 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
 * Get a solid build system working
 
 ### Micro
-* Style the block and popup pages
-* Split the to do list into high and low energy
-    * Bug fix: display glitches and broken submission
-        in both energy lists.
-    * Feature: popup should be able to add to both lists
+* Display for when there are no high/low energy tasks
+    * Show some kind of suggestion for what should be used
+* Improve clear completion UI
+* Add clearing completion to the block page
 
 ### Macro
 * Track time spent on a site
