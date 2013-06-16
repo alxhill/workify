@@ -2,7 +2,45 @@
 @import "todo";
 
 body {
+    background-color: @wet-asphalt;
     min-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+@input-radius: 10px;
+
+form.add-task {
+    input[type=text].add-input {
+        width: 100%;
+        border-top-left-radius: @input-radius;
+        border-top-right-radius: @input-radius;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .add-high, .add-low {
+        height: 37px;
+        width: 50%;
+        float: left;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .add-high {
+        border-bottom-left-radius: @input-radius;
+        border-bottom-right-radius: 0;
+        background-color:@sun-flower;
+    }
+
+    .add-low {
+        border-bottom-right-radius: @input-radius;
+        border-bottom-left-radius: 0;
+        background-color: @nephritis;
+    }
 }
 
 .energy-high {

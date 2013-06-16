@@ -29,32 +29,32 @@ chrome.runtime.onInstalled.addListener ->
       title: "Make a JavaScript compiler"
       energy: "high"
       done: false
-      id: 4
+      id: 3
     ,
       title: "Read Sal Kahns book on education"
       energy: "low"
       done: false
-      id: 5
+      id: 4
     ,
       title: "Learn WebGL and OpenGL basics"
       energy: "low"
       done: false
-      id: 6
+      id: 5
     ,
       title: "Improve the Workify logo"
       energy: "low"
       done: false
-      id: 7
+      id: 6
     ,
       title: "Learn about creating parsers and lexers"
       energy: "low"
       done: false
-      id: 8
+      id: 7
     ,
       title: "Learn marketing basics"
       energy: "low"
       done: false
-      id: 9
+      id: 8
     ]
 
 ### Functions for dealing with tabs and urls ###

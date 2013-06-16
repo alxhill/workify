@@ -15,17 +15,22 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
   $scope.load = (value) ->
     if value and value.todolist?.length > 0
-      $scope.todos = value.todolist
-      $scope.nextid = $scope.todos.length
+      window.todos  = _.clone value.todolist
+      $scope.todos  = value.todolist
+      $scope.nextid = 1 + _.max($scope.todos, "id").id
 
-  $scope.addTodo = ({title, level}) ->
-    console.log title, level
-    $scope.todos.push title: title, done: false, id: $scope.nextid++, energy: level
+  $scope.addTodo = (title, level) ->
+    console.log "title", title, "level", level
+    $scope.todos.push
+      title:  title
+      done:   false
+      id:     $scope.nextid++
+      energy: level
 
-    switch level
-      when "low"  then $scope.lowInput = ""
-      when "high" then $scope.highInput = ""
-
+    # this annoys me but it's the simplest way with one controller
+    $scope.todoInput = ""
+    $scope.lowInput  = ""
+    $scope.highInput = ""
     $scope.save()
 
   $scope.clearComplete = ->
@@ -34,5 +39,6 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
 
   $scope.remove = (id) ->
     $scope.todos = _.reject $scope.todos, (el) -> el.id is id
+    $scope.save()
 
   return

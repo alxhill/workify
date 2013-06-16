@@ -20,27 +20,22 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
   $scope.load = function(value) {
     var _ref;
     if (value && ((_ref = value.todolist) != null ? _ref.length : void 0) > 0) {
+      window.todos = _.clone(value.todolist);
       $scope.todos = value.todolist;
-      return $scope.nextid = $scope.todos.length;
+      return $scope.nextid = 1 + _.max($scope.todos, "id").id;
     }
   };
-  $scope.addTodo = function(_arg) {
-    var level, title;
-    title = _arg.title, level = _arg.level;
-    console.log(title, level);
+  $scope.addTodo = function(title, level) {
+    console.log("title", title, "level", level);
     $scope.todos.push({
       title: title,
       done: false,
       id: $scope.nextid++,
       energy: level
     });
-    switch (level) {
-      case "low":
-        $scope.lowInput = "";
-        break;
-      case "high":
-        $scope.highInput = "";
-    }
+    $scope.todoInput = "";
+    $scope.lowInput = "";
+    $scope.highInput = "";
     return $scope.save();
   };
   $scope.clearComplete = function() {
@@ -50,8 +45,9 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
     return $scope.save();
   };
   $scope.remove = function(id) {
-    return $scope.todos = _.reject($scope.todos, function(el) {
+    $scope.todos = _.reject($scope.todos, function(el) {
       return el.id === id;
     });
+    return $scope.save();
   };
 });

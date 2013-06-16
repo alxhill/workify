@@ -16,13 +16,13 @@
             <div class="todo-list high-energy pure-u-1-2">
                 <div class="todo-list-box">
                     <h3>High Energy Tasks</h3>
-                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'high'}" ng-click='save()'>
-                        <input type="checkbox" id="todo-{{todo.id}}">
+                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'high'}">
+                        <input type="checkbox" id="todo-{{todo.id}}"  ng-model="todo.done" ng-change="save()">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
-                    <form ng-submit="addTodo(highInputTitle,highInputLevel)" class="pure-g-r">
-                        <input type="text" class="pure-4-5" ng-model="highInputTitle" placeholder="Add a task">
-                        <button class="pure-button pure-1-5">Add</button>
+                    <form ng-submit="addTodo(highInput, 'high')" class="pure-g-r">
+                        <input type="text" class="pure-u-4-5" ng-model="highInput" placeholder="Add a task">
+                        <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
                     </form>
                 </div>
             </div>
@@ -30,20 +30,21 @@
             <div class="todo-list low-energy pure-u-1-2">
                 <div class="todo-list-box">
                     <h3>Low Energy Tasks</h3>
-                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'low'}" ng-click='save()'>
-                        <input type="checkbox" id="todo-{{todo.id}}">
+                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'low'}">
+                        <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="save()">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
-                    <form ng-submit="addTodo(lowInput)" class="pure-g-r">
-                        <input type="text" class="pure-4-5" ng-model="lowInput.title" placeholder="Add a task">
-                        <button class="pure-button pure-1-5">Add</button>
+                    <form ng-submit="addTodo(lowInput, 'low')" class="pure-g-r">
+                        <input type="text" class="pure-u-4-5" ng-model="lowInput" placeholder="Add a task">
+                        <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
                     </form>
                 </div>
             </div>
         </div>
 
         <footer ng-controller="BlockerCtrl">
-            <h2>Alternatively, you'll be redirected to your page in {{remaining}} seconds.</h2>
+            <h2 ng-hide="done">Alternatively, you can visit this page in {{remaining}} seconds.</h2>
+            <button class="pure-button unblock" ng-show="done" ng-click="unblock()">Visit Page</button>
         </footer>
 
         <script src="scripts/app.js"></script>
