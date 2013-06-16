@@ -11,17 +11,50 @@ chrome.runtime.onInstalled.addListener ->
     restoreUrl: {}
     safeTabs: []
     todolist: [
-      title: "Populate Workify with the things you want to do"
+      title: "Build Workify"
+      energy: "high"
       done: false
       id: 0
     ,
-      title: "Finish building Workify"
+      title: "Make a HN iOS 7 app"
+      energy: "high"
       done: false
       id: 1
     ,
-      title: "Learn Angular JS"
+      title: "Work on JobFoundry outcomes prototype"
+      energy: "high"
       done: false
       id: 2
+    ,
+      title: "Make a JavaScript compiler"
+      energy: "high"
+      done: false
+      id: 4
+    ,
+      title: "Read Sal Kahns book on education"
+      energy: "low"
+      done: false
+      id: 5
+    ,
+      title: "Learn WebGL and OpenGL basics"
+      energy: "low"
+      done: false
+      id: 6
+    ,
+      title: "Improve the Workify logo"
+      energy: "low"
+      done: false
+      id: 7
+    ,
+      title: "Learn about creating parsers and lexers"
+      energy: "low"
+      done: false
+      id: 8
+    ,
+      title: "Learn marketing basics"
+      energy: "low"
+      done: false
+      id: 9
     ]
 
 ### Functions for dealing with tabs and urls ###

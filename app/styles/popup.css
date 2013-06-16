@@ -81,23 +81,12 @@ a:hover {
   color: white;
   border: none !important;
 }
-header {
-  text-align: center;
+body {
+  min-width: 400px;
 }
-header h1 {
-  font-size: 56px;
-  margin: 40px 0;
+.energy-high {
+  background-color: #2ecc71;
 }
-header h2 {
-  font-size: 28px;
-}
-footer {
-  text-align: center;
-  margin-top: 40px;
-}
-#todo-lists {
-  margin-top: 75px;
-}
-#todo-lists .todo-list {
-  padding: 0 8% 0 8%;
+.energy-low {
+  background-color: #e67e22;
 }

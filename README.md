@@ -22,6 +22,10 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
 
 ## To do list
 
+### Non-product
+* Write some tests - TDD/BDD
+* Get a solid build system working
+
 ### Micro
 * Style the block and popup pages
 * Split the to do list into high and low energy

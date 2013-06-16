@@ -1,41 +1,40 @@
 <html ng-app="workify" ng-csp>
-<head>
-    <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/flat-ui.css">
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-    <h1>Workify Project List</h1>
+    <head>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
+        <link rel="stylesheet" href="styles/popup.css">
+        <script src="components/lodash/dist/lodash.min.js"></script>
+        <script src="components/angular/angular.js"></script>
+    </head>
+    <body>
+        <h1>Workify Project List</h1>
 
-    <div id="todo-list" ng-controller="TodoCtrl">
-        <a href="" ng-click="clearComplete()">clear complete</a>
-        <div ng-repeat="todo in todos">
-            <label class="todo-label" for="done-{{todo.id}}">
-            <input type="checkbox" id="done-{{todo.id}}" class="todo-list checkbox" ng-model="todo.done" ng-click="save()">
-                {{todo.title}}
-            </label>
-            <!-- This button looked awful, but I'll probably add something similar back in. -->
-            <!-- <button ng-click="remove(todo.id)">x</button> -->
+        <div class="todo-list" ng-controller="TodoCtrl">
+            <div class="todo-list">
+                <div class="todo-list-box">
+                    <a ng-click="clearComplete()">clear complete</a>
+                    <div class="todo" ng-repeat="todo in todos" ng-click='save()'>
+                        <input type="checkbox" id="todo-{{todo.id}}">
+                        <label  for="todo-{{todo.id}}">{{todo.title}}</label>
+                    </div>
+                    <form ng-submit="addTodo(todoInput)" class="pure-g-r">
+                        <input type="text" class="pure-4-5" ng-model="todoInput" placeholder="Add a task" autofocus>
+                        <button type="submit" class="pure-button pure-1-5">Add</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <form ng-submit="addTodo(todoInput)">
-            <input type="text" ng-model="todoInput" placeholder="Add a project" autofocus>
-            <button type="submit" class="Btn btn-primary">Add</button>
-        </form>
-    </div>
 
-    <div id="blocker" ng-controller="BlockCtrl">
-        <p ng-show="blocked">This page is currently blocked.</p>
-        <p ng-hide="blocked">This page is not blocked.</p>
-        <form ng-submit="toggle()">
-            <button type="submit" ng-hide="blocked" class="btn btn-primary">Block this page</button>
-            <button type="submit" ng-show="blocked" class="btn btn-primary">Unblock this page</button>
-        </form>
-    </div>
+        <div id="blocker" ng-controller="BlockCtrl">
+            <p ng-show="blocked">This page is currently blocked.</p>
+            <p ng-hide="blocked">This page is not blocked.</p>
+            <form ng-submit="toggle()">
+                <button type="submit" ng-hide="blocked" class="btn btn-primary">Block this page</button>
+                <button type="submit" ng-show="blocked" class="btn btn-primary">Unblock this page</button>
+            </form>
+        </div>
 
-    <script src="components/lodash/dist/lodash.min.js"></script>
-    <script src="components/angular/angular.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/todo.js"></script>
-    <script src="scripts/block.js"></script>
-</body>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/todo.js"></script>
+        <script src="scripts/block.js"></script>
+    </body>
 </html>

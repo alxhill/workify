@@ -24,7 +24,7 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
       return $scope.nextid = $scope.todos.length;
     }
   };
-  $scope.addTodo = function(title) {
+  $scope.addTodo = function(title, energy) {
     if (title != null) {
       if (angular.isArray(title)) {
         $scope.todos = $scope.todos.concat(_.map(title, function(el) {

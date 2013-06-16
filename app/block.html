@@ -3,23 +3,48 @@
         <title>Page Blocked</title>
         <script src="components/lodash/dist/lodash.min.js"></script>
         <script src="components/angular/angular.js"></script>
-        <link rel="stylesheet" href="styles/bootstrap.css">
-        <link rel="stylesheet" href="styles/flat-ui.css">
-        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
+        <link rel="stylesheet" href="styles/block.css">
     </head>
     <body>
-        <div id="blocked" ng-controller="BlockerCtrl">
-            <h1>Workify has blocked this page for {{remaining}} seconds.</h1>
-            <p ng-show="done">Page unblocked!</p>
-        </div>
+        <header>
+            <h1>You should get back to work.</h1>
+            <h2>But if you're struggling, here are some productive things to do:</h2>
+        </header>
 
-        <div id="todo" ng-controller="TodoCtrl">
-            <h2>Here are some better things to do:</h2>
-            <div ng-repeat="todo in todos">
-                <input type="checkbox" id="done-{{todo.id}}" ng-model="todo.done" ng-click="save()">
-                <label class="done-{{todo.done}} todo-label" for="done-{{todo.id}}">{{todo.title}}</label>
+        <div id="todo-lists" class="pure-g-r" ng-controller="TodoCtrl">
+            <div class="todo-list high-energy pure-u-1-2">
+                <div class="todo-list-box">
+                    <h3>High Energy Tasks</h3>
+                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'high'}" ng-click='save()'>
+                        <input type="checkbox" id="todo-{{todo.id}}">
+                        <label for="todo-{{todo.id}}">{{todo.title}}</label>
+                    </div>
+                </div>
+                <form ng-submit="addTodo(todoInput, 'high')" class="pure-g-r">
+                    <input type="text" class="pure-4-5" ng-model="todoInput" placeholder="Add a task">
+                    <button class="pure-button pure-1-5">Add</button>
+                </form>
+            </div>
+
+            <div class="todo-list low-energy pure-u-1-2">
+                <div class="todo-list-box">
+                    <h3>Low Energy Tasks</h3>
+                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'low'}" ng-click='save()'>
+                        <input type="checkbox" id="todo-{{todo.id}}">
+                        <label for="todo-{{todo.id}}">{{todo.title}}</label>
+                    </div>
+                </div>
+                <form ng-submit="addTodo(todoInput, 'low')" class="pure-g-r">
+                    <input type="text" class="pure-4-5" ng-model="todoInput" placeholder="Add a task">
+                    <button class="pure-button pure-1-5">Add</button>
+                </form>
             </div>
         </div>
+
+        <footer ng-controller="BlockerCtrl">
+            <h2>Alternatively, you'll be redirected to your page in {{remaining}} seconds.</h2>
+        </footer>
 
         <script src="scripts/app.js"></script>
         <script src="scripts/todo.js"></script>

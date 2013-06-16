@@ -18,7 +18,7 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
       $scope.todos = value.todolist
       $scope.nextid = $scope.todos.length
 
-  $scope.addTodo = (title) ->
+  $scope.addTodo = (title, energy) ->
     if title?
       if angular.isArray(title)
         $scope.todos = $scope.todos.concat _.map title, (el) -> title: el, done: false, id: $scope.nextid++
