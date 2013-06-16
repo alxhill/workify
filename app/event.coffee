@@ -58,7 +58,7 @@ chrome.runtime.onInstalled.addListener ->
     ]
 
 ### Functions for dealing with tabs and urls ###
-
+### This is meant to be accesible from outside the background page ###
 Tab =
   normaliseUrl: (url) ->
     # the <a> tag can parse out the hostname (and other properties) of a url.
@@ -95,10 +95,12 @@ Tab =
           cb.call Tab, blockTab
 
   addToBlocklist: (url) ->
-    host = Tab.normaliseUrl url
-    get 'blocklist', ({blocklist}) ->
-      blocklist.push host
-      set blocklist: blocklist
+    # make sure we don't block normal chrome pages/itself.
+    unless url.indexOf("chrome") is 0
+      host = Tab.normaliseUrl url
+      get 'blocklist', ({blocklist}) ->
+        blocklist.push host
+        set blocklist: blocklist
 
   removeFromBlocklist: (url) ->
     host = Tab.normaliseUrl url

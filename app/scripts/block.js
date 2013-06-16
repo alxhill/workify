@@ -8,9 +8,11 @@ angular.module('workify').controller('BlockCtrl', function($scope) {
     Tab = bg.Tab;
     return chrome.tabs.query({
       active: true,
-      windowType: 'normal'
+      windowType: 'normal',
+      currentWindow: true
     }, function(tabs) {
       var tab;
+      console.log(tabs);
       tab = tabs[0];
       url = tab.url;
       return Tab.inBlocklist(tab.url, function() {

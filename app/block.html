@@ -16,11 +16,16 @@
             <div class="todo-list high-energy pure-u-1-2">
                 <div class="todo-list-box">
                     <h3>High Energy Tasks</h3>
+                    <div id="no-high" ng-show="(todos | filter:{energy: 'high'}).length == 0">
+                        You have no high energy tasks.
+                        <br><br>
+                        A high energy task could be writing, making, building, or doing something.
+                    </div>
                     <div class="todo" ng-repeat="todo in todos | filter:{energy:'high'}">
                         <input type="checkbox" id="todo-{{todo.id}}"  ng-model="todo.done" ng-change="save()">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
-                    <form ng-submit="addTodo(highInput, 'high')" class="pure-g-r">
+                    <form ng-submit="addTodo(highInput, 'high')" class="pure-g">
                         <input type="text" class="pure-u-4-5" ng-model="highInput" placeholder="Add a task">
                         <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
                     </form>
@@ -30,11 +35,16 @@
             <div class="todo-list low-energy pure-u-1-2">
                 <div class="todo-list-box">
                     <h3>Low Energy Tasks</h3>
+                    <div id="no-low" ng-show="(todos | filter:{energy:'low'}).length == 0">
+                        You have no low energy tasks.
+                        <br><br>
+                        A low energy task could be reading, learning, or watching something.
+                    </div>
                     <div class="todo" ng-repeat="todo in todos | filter:{energy:'low'}">
                         <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="save()">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
-                    <form ng-submit="addTodo(lowInput, 'low')" class="pure-g-r">
+                    <form ng-submit="addTodo(lowInput, 'low')" class="pure-g">
                         <input type="text" class="pure-u-4-5" ng-model="lowInput" placeholder="Add a task">
                         <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
                     </form>

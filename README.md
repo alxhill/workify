@@ -11,11 +11,11 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
     * Split into high and low energy tasks
     * Could integrate with a site like Pocket and/or Trello
 ======== v0.1 ========
+* Permanently block certain sites
+======== v0.2 ========
 * Track how long you've spent on certain sites
 * Alert you after a certain amount of time on an unproductive site
     * Show you how much you could have made on minimum wage during that time?
-======== v0.2 ========
-* Permanently block certain sites
 ======== v0.3 ========
 * Focus Mode
     * Permanently blocks certain sites
@@ -32,10 +32,13 @@ At it's core, it delays access to unproductive sites and shows you a list of thi
 * Get a solid build system working
 
 ### Micro
+* Improve clear completion UI
+* Fix block page collapsed UI!
 * Display for when there are no high/low energy tasks
     * Show some kind of suggestion for what should be used
-* Improve clear completion UI
 * Add clearing completion to the block page
+* Enable editing of existing tasks
+* Fix safeTab system so only same site tabs can be opened
 
 ### Macro
 * Track time spent on a site

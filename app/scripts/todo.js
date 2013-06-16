@@ -18,11 +18,14 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
   };
   $scope.save();
   $scope.load = function(value) {
-    var _ref;
-    if (value && ((_ref = value.todolist) != null ? _ref.length : void 0) > 0) {
-      window.todos = _.clone(value.todolist);
+    if (value) {
+      if (value.todolist == null) {
+        value.todolist = [];
+      }
       $scope.todos = value.todolist;
       return $scope.nextid = 1 + _.max($scope.todos, "id").id;
+    } else {
+
     }
   };
   $scope.addTodo = function(title, level) {

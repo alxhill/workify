@@ -7,7 +7,8 @@ angular.module('workify').controller 'BlockCtrl', ($scope) ->
 
   chrome.runtime.getBackgroundPage (bg) ->
     Tab = bg.Tab
-    chrome.tabs.query active: true, windowType: 'normal', (tabs) ->
+    chrome.tabs.query active: true, windowType: 'normal', currentWindow: true, (tabs) ->
+      console.log tabs
       tab = tabs[0]
       url = tab.url
       Tab.inBlocklist tab.url, ->

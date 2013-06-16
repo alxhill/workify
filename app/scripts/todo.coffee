@@ -14,10 +14,11 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
   $scope.save()
 
   $scope.load = (value) ->
-    if value and value.todolist?.length > 0
-      window.todos  = _.clone value.todolist
+    if value
+      value.todolist ?= []
       $scope.todos  = value.todolist
       $scope.nextid = 1 + _.max($scope.todos, "id").id
+    else
 
   $scope.addTodo = (title, level) ->
     console.log "title", title, "level", level
