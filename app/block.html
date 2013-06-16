@@ -20,11 +20,11 @@
                         <input type="checkbox" id="todo-{{todo.id}}">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
+                    <form ng-submit="addTodo(highInputTitle,highInputLevel)" class="pure-g-r">
+                        <input type="text" class="pure-4-5" ng-model="highInputTitle" placeholder="Add a task">
+                        <button class="pure-button pure-1-5">Add</button>
+                    </form>
                 </div>
-                <form ng-submit="addTodo(todoInput, 'high')" class="pure-g-r">
-                    <input type="text" class="pure-4-5" ng-model="todoInput" placeholder="Add a task">
-                    <button class="pure-button pure-1-5">Add</button>
-                </form>
             </div>
 
             <div class="todo-list low-energy pure-u-1-2">
@@ -34,11 +34,11 @@
                         <input type="checkbox" id="todo-{{todo.id}}">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
+                    <form ng-submit="addTodo(lowInput)" class="pure-g-r">
+                        <input type="text" class="pure-4-5" ng-model="lowInput.title" placeholder="Add a task">
+                        <button class="pure-button pure-1-5">Add</button>
+                    </form>
                 </div>
-                <form ng-submit="addTodo(todoInput, 'low')" class="pure-g-r">
-                    <input type="text" class="pure-4-5" ng-model="todoInput" placeholder="Add a task">
-                    <button class="pure-button pure-1-5">Add</button>
-                </form>
             </div>
         </div>
 

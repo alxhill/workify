@@ -18,15 +18,15 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
       $scope.todos = value.todolist
       $scope.nextid = $scope.todos.length
 
-  $scope.addTodo = (title, energy) ->
-    if title?
-      if angular.isArray(title)
-        $scope.todos = $scope.todos.concat _.map title, (el) -> title: el, done: false, id: $scope.nextid++
-      else
-        $scope.todos.push title: title, done: false, id: $scope.nextid++
+  $scope.addTodo = ({title, level}) ->
+    console.log title, level
+    $scope.todos.push title: title, done: false, id: $scope.nextid++, energy: level
 
-      $scope.todoInput = ""
-      $scope.save()
+    switch level
+      when "low"  then $scope.lowInput = ""
+      when "high" then $scope.highInput = ""
+
+    $scope.save()
 
   $scope.clearComplete = ->
     $scope.todos = _.where $scope.todos, done: false

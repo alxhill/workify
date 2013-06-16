@@ -24,26 +24,24 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
       return $scope.nextid = $scope.todos.length;
     }
   };
-  $scope.addTodo = function(title, energy) {
-    if (title != null) {
-      if (angular.isArray(title)) {
-        $scope.todos = $scope.todos.concat(_.map(title, function(el) {
-          return {
-            title: el,
-            done: false,
-            id: $scope.nextid++
-          };
-        }));
-      } else {
-        $scope.todos.push({
-          title: title,
-          done: false,
-          id: $scope.nextid++
-        });
-      }
-      $scope.todoInput = "";
-      return $scope.save();
+  $scope.addTodo = function(_arg) {
+    var level, title;
+    title = _arg.title, level = _arg.level;
+    console.log(title, level);
+    $scope.todos.push({
+      title: title,
+      done: false,
+      id: $scope.nextid++,
+      energy: level
+    });
+    switch (level) {
+      case "low":
+        $scope.lowInput = "";
+        break;
+      case "high":
+        $scope.highInput = "";
     }
+    return $scope.save();
   };
   $scope.clearComplete = function() {
     $scope.todos = _.where($scope.todos, {
