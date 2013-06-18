@@ -2,10 +2,10 @@
 "use strict";
 angular.module('workify').controller('BlockerCtrl', function($scope, $timeout) {
   var timefunc, timeout;
-  $scope.remaining = 5;
+  $scope.remaining = 30;
   $scope.done = false;
   timeout = $timeout(timefunc = function() {
-    if ($scope.remaining === 0) {
+    if ($scope.remaining === 1) {
       return $scope.done = true;
     } else {
       $scope.remaining--;

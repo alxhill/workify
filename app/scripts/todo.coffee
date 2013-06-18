@@ -19,6 +19,8 @@ angular.module('workify').controller 'TodoCtrl', ($scope) ->
       $scope.todos  = value.todolist
       $scope.nextid = 1 + _.max($scope.todos, "id").id
     else
+      $scope.todos = []
+      $scope.nextid = 0
 
   $scope.addTodo = (title, level) ->
     console.log "title", title, "level", level

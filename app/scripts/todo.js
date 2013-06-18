@@ -25,7 +25,8 @@ angular.module('workify').controller('TodoCtrl', function($scope) {
       $scope.todos = value.todolist;
       return $scope.nextid = 1 + _.max($scope.todos, "id").id;
     } else {
-
+      $scope.todos = [];
+      return $scope.nextid = 0;
     }
   };
   $scope.addTodo = function(title, level) {
