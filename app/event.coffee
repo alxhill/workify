@@ -31,30 +31,35 @@ chrome.runtime.onInstalled.addListener ->
       done: false
       id: 3
     ,
-      title: "Read Sal Kahns book on education"
-      energy: "low"
+      title: "Work on ResourceFoundy"
+      energy: "high"
       done: false
       id: 4
     ,
-      title: "Learn WebGL and OpenGL basics"
+      title: "Read Sal Kahns book on education"
       energy: "low"
       done: false
       id: 5
     ,
-      title: "Improve the Workify logo"
+      title: "Learn WebGL and OpenGL basics"
       energy: "low"
       done: false
       id: 6
     ,
-      title: "Learn about creating parsers and lexers"
+      title: "Improve the Workify logo"
       energy: "low"
       done: false
       id: 7
     ,
-      title: "Learn marketing basics"
+      title: "Learn about creating parsers and lexers"
       energy: "low"
       done: false
       id: 8
+    ,
+      title: "Learn marketing basics"
+      energy: "low"
+      done: false
+      id: 9
     ]
 
 ### Functions for dealing with tabs and urls ###
@@ -119,10 +124,14 @@ Tab =
 
 chrome.tabs.onCreated.addListener (tab) ->
   get 'safeTabs', ({safeTabs}) ->
-    console.log tab
     if tab.openerTabId? and tab.openerTabId in safeTabs
-      safeTabs.push tab.id
-      set safeTabs: safeTabs
+      # could be a page we shouldn't block. But we need
+      # check that it's the same actual page to block, and
+      # if it isn't, don't put it in safeTabs
+      chrome.tabs.get tab.openerTabId, (openerTab) ->
+        if Tab.normaliseUrl(openerTab.url) is Tab.normaliseUrl(tab.url)
+          safeTabs.push tab.id
+          set safeTabs: safeTabs
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
   Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
