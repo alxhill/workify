@@ -16,3 +16,5 @@ angular.module('workify').controller 'BlockerCtrl', ($scope, $timeout) ->
   $scope.unblock = ->
     chrome.tabs.getCurrent (tab) ->
       chrome.runtime.sendMessage method: 'unblock', args: [tab]
+
+  window.unblock = $scope.unblock

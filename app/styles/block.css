@@ -73,6 +73,12 @@ a:hover {
   user-select: none;
   padding-left: 10px;
 }
+.todo-list .todo button.pure-button.remove {
+  color: #c0392b;
+  background-color: #34495e;
+  float: right;
+  padding: 0;
+}
 .todo-list .todo input[type=checkbox] {
   -webkit-appearance: none;
   width: 14px;
@@ -110,6 +116,19 @@ a:hover {
   font-size: 16.8px;
   background-color: #2ecc71;
   border: none !important;
+}
+.todo-list .done-dot {
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  border-radius: 7px;
+  display: inline-block;
+}
+.todo-list .done-dot.done-dot-high {
+  background-color: #2980b9;
+}
+.todo-list .done-dot.done-dot-low {
+  background-color: #27ae60;
 }
 header {
   text-align: center;

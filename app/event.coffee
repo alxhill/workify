@@ -7,7 +7,7 @@ set = (obj) -> chrome.storage.local.set obj
 # set up the basic backend objects for workify
 chrome.runtime.onInstalled.addListener ->
   set
-    blocklist: ["reddit.com", "10fastfingers.com", "facebook.com", "news.ycombinator.com"]
+    blocklist: ["reddit.com", "10fastfingers.com", "facebook.com"]
     restoreUrl: {}
     safeTabs: []
     todolist: [
@@ -56,7 +56,7 @@ chrome.runtime.onInstalled.addListener ->
       done: false
       id: 8
     ,
-      title: "Learn marketing basics"
+      title: "Read The Lean Startup"
       energy: "low"
       done: false
       id: 9

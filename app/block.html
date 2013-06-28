@@ -4,6 +4,7 @@
         <script src="components/lodash/dist/lodash.min.js"></script>
         <script src="components/angular/angular.js"></script>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="styles/block.css">
     </head>
     <body>
@@ -22,11 +23,12 @@
                         A high energy task could be writing, making, building, or doing something.
                     </div>
                     <div class="todo" ng-repeat="todo in todos | filter:{energy:'high'}">
-                        <input type="checkbox" id="todo-{{todo.id}}"  ng-model="todo.done" ng-change="save()">
+                        <span class="done-dot done-dot-{{todo.energy}}"></span>
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
+
                     </div>
-                    <form ng-submit="addTodo(highInput, 'high')" class="pure-g">
-                        <input type="text" class="pure-u-4-5" ng-model="highInput" placeholder="Add a task">
+                    <form ng-submit="addTodo(input.high, 'high')" class="pure-g">
+                        <input type="text" class="pure-u-4-5" ng-model="input.high" placeholder="Add a task">
                         <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
                     </form>
                 </div>
@@ -41,11 +43,12 @@
                         A low energy task could be reading, learning, or watching something.
                     </div>
                     <div class="todo" ng-repeat="todo in todos | filter:{energy:'low'}">
+                        <span class="done-dot done-dot-{{todo.energy}}"></span>
                         <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="save()">
                         <label for="todo-{{todo.id}}">{{todo.title}}</label>
                     </div>
-                    <form ng-submit="addTodo(lowInput, 'low')" class="pure-g">
-                        <input type="text" class="pure-u-4-5" ng-model="lowInput" placeholder="Add a task">
+                    <form ng-submit="addTodo(input.low, 'low')" class="pure-g">
+                        <input type="text" class="pure-u-4-5" ng-model="input.low" placeholder="Add a task">
                         <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
                     </form>
                 </div>
@@ -58,7 +61,8 @@
         </footer>
 
         <script src="scripts/app.js"></script>
-        <script src="scripts/todo.js"></script>
-        <script src="scripts/blocker.js"></script>
+        <script src="scripts/services.js"></script>
+        <script src="scripts/controllers/todo.js"></script>
+        <script src="scripts/controllers/blocker.js"></script>
     </body>
 </html>

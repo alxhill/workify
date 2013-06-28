@@ -4,15 +4,15 @@ angular.module('workify').controller('BlockCtrl', function($scope) {
   var Tab, url;
   Tab = null;
   url = null;
-  chrome.runtime.getBackgroundPage(function(bg) {
-    Tab = bg.Tab;
+  chrome.runtime.getBackgroundPage(function(_arg) {
+    var Tab;
+    Tab = _arg.Tab;
     return chrome.tabs.query({
       active: true,
       windowType: 'normal',
       currentWindow: true
     }, function(tabs) {
       var tab;
-      console.log(tabs);
       tab = tabs[0];
       url = tab.url;
       return Tab.inBlocklist(tab.url, function() {

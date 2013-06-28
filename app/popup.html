@@ -1,6 +1,7 @@
 <html ng-app="workify" ng-csp>
     <head>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="styles/popup.css">
         <script src="components/lodash/dist/lodash.min.js"></script>
         <script src="components/angular/angular.js"></script>
@@ -20,11 +21,14 @@
                 <a class="complete" ng-click="clearComplete()">clear complete</a>
                 <div class="todo" ng-repeat="todo in todos">
                     <span class="done-dot done-dot-{{todo.energy}}"></span>
-                    <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="save()">
+                    <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="update()">
                     <label for="todo-{{todo.id}}">{{todo.title}}</label>
+                    <button ng-click="remove(todo.id)" class="pure-button remove">
+                        <i class="icon-ok"></i>
+                    </button>
                 </div>
-                <form ng-submit="addTodo(todoInput, energy)" class="add-task">
-                    <input type="text" class="add-input" ng-model="todoInput" placeholder="Add a task" autofocus>
+                <form ng-submit="addTodo(input.todo, energy)" class="add-task">
+                    <input type="text" class="add-input" ng-model="input.todo" placeholder="Add a task" autofocus>
                     <button type="submit" ng-click="energy='high'" class="pure-button add-high">Add High Energy</button>
                     <button type="submit" ng-click="energy='low'" class="pure-button add-low">Add Low Energy</button>
                 </form>
@@ -32,7 +36,8 @@
         </div>
 
         <script src="scripts/app.js"></script>
-        <script src="scripts/todo.js"></script>
-        <script src="scripts/block.js"></script>
+        <script src="scripts/services.js"></script>
+        <script src="scripts/controllers/todo.js"></script>
+        <script src="scripts/controllers/block.js"></script>
     </body>
 </html>

@@ -32,15 +32,17 @@ It delays access to unproductive sites and shows you a list of things you should
 * Get a solid build system working
 
 ### Micro
-* Improve clear completion UI
-* Fix block page collapsed UI!
-* Fix safeTab system so only same site tabs can be opened
-* Display for when there are no high/low energy tasks
-    * Show some kind of suggestion for what should be used
+#### Features
 * Add clearing completion to the block page
 * Enable editing of existing tasks
-* Implement some way to reorder tasks
+* Improve clear completion UI
+* Implement task reordering
+
+#### Bugs
+* Fix block page collapsed UI
+* Stop workify blocking pages opened from another page - e.g reddit comments
+* Don't block facebook api request dialogs
 
 ### Macro
-* Track time spent on a site
 * Perma-blocking
+* Track time spent on a site

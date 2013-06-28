@@ -1,3 +1,4 @@
 app/*.js
 app/components
 node_modules
+workify.sublime-*

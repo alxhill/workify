@@ -37,6 +37,13 @@
             padding-left: 10px;
         }
 
+        button.pure-button.remove {
+            color: @pomegranate;
+            background-color: @wet-asphalt;
+            float: right;
+            padding: 0;
+        }
+
         input[type=checkbox] {
             -webkit-appearance: none;
             width: 14px;
@@ -78,6 +85,23 @@
             font-size: @label-font-size;
             background-color: @emerland;
             border: none !important;
+        }
+    }
+
+    @dot-size: 14px;
+    .done-dot {
+        width: @dot-size;
+        height: @dot-size;
+        margin-right: 10px;
+        border-radius: @dot-size/2;
+        display: inline-block;
+
+        &.done-dot-high {
+            background-color: @high-color;
+        }
+
+        &.done-dot-low {
+            background-color: @low-color;
         }
     }
 }
