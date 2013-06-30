@@ -4,9 +4,8 @@ angular.module('workify').controller('BlockCtrl', function($scope) {
   var Tab, url;
   Tab = null;
   url = null;
-  chrome.runtime.getBackgroundPage(function(_arg) {
-    var Tab;
-    Tab = _arg.Tab;
+  chrome.runtime.getBackgroundPage(function(bg) {
+    Tab = bg.Tab;
     return chrome.tabs.query({
       active: true,
       windowType: 'normal',
@@ -24,6 +23,7 @@ angular.module('workify').controller('BlockCtrl', function($scope) {
   });
   $scope.blocked = false;
   $scope.toggle = function() {
+    console.log(Tab);
     if (!$scope.blocked) {
       Tab.addToBlocklist(url);
     } else {

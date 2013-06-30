@@ -4,6 +4,10 @@
 get = (name, cb) -> chrome.storage.local.get name, cb
 set = (obj) -> chrome.storage.local.set obj
 
+Array::remove = (element) ->
+  if element in this
+    this.splice this.indexOf(element), 1
+
 # set up the basic backend objects for workify
 chrome.runtime.onInstalled.addListener ->
   set
@@ -95,7 +99,10 @@ Tab =
           chrome.tabs.get tab.openerTabId, (openerTab) ->
             if Tab.normaliseUrl(openerTab.url) is Tab.normaliseUrl(tab.url)
               safeTabs.push tab.id
-              set safeTabs: safeTabs
+            else if tab.id in safeTabs
+              safeTabs.splice safeTabs.indexOf(tab.id), 1
+            set safeTabs: safeTabs
+
 
         Tab.inBlocklist tab.url, ->
           if tab.id not of restoreUrl and tab.id not in safeTabs
@@ -124,21 +131,6 @@ Tab =
       if host in blocklist then cb()
 
 ### Listen to chrome.tabs events ###
-
-# chrome.tabs.onCreated.addListener (tab) ->
-#   get 'safeTabs', ({safeTabs}) ->
-#     console.log 'tab id:',tab.id, 'tab opener:', tab.openerTabId, 'tab:', tab
-#     if tab.openerTabId? and tab.openerTabId in safeTabs
-#       console.log 'tab should be blocked'
-#       # could be a page we shouldn't block. But we need
-#       # check that it's the same actual page to block, and
-#       # if it isn't, don't put it in safeTabs
-#       chrome.tabs.get tab.openerTabId, (openerTab) ->
-#         console.log 'openerTab', openerTab
-#         console.log 'urls'
-#         if Tab.normaliseUrl(openerTab.url) is Tab.normaliseUrl(tab.url)
-#           safeTabs.push tab.id
-#           set safeTabs: safeTabs
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
   Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
