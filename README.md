@@ -33,9 +33,7 @@ It delays access to unproductive sites and shows you a list of things you should
 
 ### Micro
 #### Features
-* Add clearing completion to the block page
 * Enable editing of existing tasks
-* Improve clear completion UI
 * Implement task reordering
 
 #### Bugs
