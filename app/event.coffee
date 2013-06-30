@@ -31,7 +31,7 @@ chrome.runtime.onInstalled.addListener ->
       done: false
       id: 3
     ,
-      title: "Work on ResourceFoundy"
+      title: "Work on ResourceFoundry"
       energy: "high"
       done: false
       id: 4

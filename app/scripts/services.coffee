@@ -2,18 +2,18 @@
 
 angular.module('workify').service 'Todos',
   class Todos
-    constructor: (@$q) ->
+    constructor: (@$q, @$rootScope) ->
       @qTodolist = @$q.defer()
       @loaded = false
 
-    get: ($scope) ->
+    get: ->
       # make sure to get a new deferred object when this is called
       if @loaded then @qTodolist = @$q.defer()
       chrome.storage.local.get 'todolist', ({todolist}) =>
         if todolist?
-          $scope.$apply => @qTodolist.resolve todolist
+          @$rootScope.$apply => @qTodolist.resolve todolist
         else
-          $scope.$apply => @qTodolist.resolve []
+          @$rootScope.$apply => @qTodolist.resolve []
         @loaded = true
 
       return @qTodolist.promise
@@ -38,11 +38,11 @@ angular.module('workify').service 'Todos',
 
     remove: (id) ->
       @qTodolist.promise.then (todolist) =>
+        console.log id, todolist
         for todo in todolist
           if todo.id is id
-            console.log todo, id
             todolist.splice todolist.indexOf(todo), 1
-            console.log todolist
+            break
         @update(todolist)
 
     _getNextId: ->

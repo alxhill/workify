@@ -15,28 +15,20 @@
             </form>
         </div>
 
-        <div class="todo-list" ng-controller="TodoCtrl">
-            <div class="todo-list-box">
-                <h3>Workify Task List</h3>
-                <a class="complete" ng-click="clearComplete()">clear complete</a>
-                <div class="todo" ng-repeat="todo in todos">
-                    <span class="done-dot done-dot-{{todo.energy}}"></span>
-                    <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="update()">
-                    <label for="todo-{{todo.id}}">{{todo.title}}</label>
-                    <button ng-click="remove(todo.id)" class="pure-button remove">
-                        <i class="icon-ok"></i>
-                    </button>
-                </div>
-                <form ng-submit="addTodo(input.todo, energy)" class="add-task">
-                    <input type="text" class="add-input" ng-model="input.todo" placeholder="Add a task" autofocus>
+        <div ng-controller="TodoCtrl">
+            <todo-list title="Workify Task List" todos="todos" remove="remove($id)" empty-message="You have no tasks in either of your workify lists" custom-form>
+                <form ng-submit="addTodo(input, energy) &amp;&amp; (input='')" class="add-task">
+                    <input type="text" class="add-input" ng-model="input" placeholder="Add a task" autofocus>
                     <button type="submit" ng-click="energy='high'" class="pure-button add-high">Add High Energy</button>
                     <button type="submit" ng-click="energy='low'" class="pure-button add-low">Add Low Energy</button>
                 </form>
-            </div>
+            </todo-list>
+
         </div>
 
         <script src="scripts/app.js"></script>
         <script src="scripts/services.js"></script>
+        <script src="scripts/directives.js"></script>
         <script src="scripts/controllers/todo.js"></script>
         <script src="scripts/controllers/block.js"></script>
     </body>

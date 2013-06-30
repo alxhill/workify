@@ -3,13 +3,14 @@
 var Todos;
 
 angular.module('workify').service('Todos', Todos = (function() {
-  function Todos($q) {
+  function Todos($q, $rootScope) {
     this.$q = $q;
+    this.$rootScope = $rootScope;
     this.qTodolist = this.$q.defer();
     this.loaded = false;
   }
 
-  Todos.prototype.get = function($scope) {
+  Todos.prototype.get = function() {
     var _this = this;
     if (this.loaded) {
       this.qTodolist = this.$q.defer();
@@ -18,11 +19,11 @@ angular.module('workify').service('Todos', Todos = (function() {
       var todolist;
       todolist = _arg.todolist;
       if (todolist != null) {
-        $scope.$apply(function() {
+        _this.$rootScope.$apply(function() {
           return _this.qTodolist.resolve(todolist);
         });
       } else {
-        $scope.$apply(function() {
+        _this.$rootScope.$apply(function() {
           return _this.qTodolist.resolve([]);
         });
       }
@@ -65,12 +66,12 @@ angular.module('workify').service('Todos', Todos = (function() {
     var _this = this;
     return this.qTodolist.promise.then(function(todolist) {
       var todo, _i, _len;
+      console.log(id, todolist);
       for (_i = 0, _len = todolist.length; _i < _len; _i++) {
         todo = todolist[_i];
         if (todo.id === id) {
-          console.log(todo, id);
           todolist.splice(todolist.indexOf(todo), 1);
-          console.log(todolist);
+          break;
         }
       }
       return _this.update(todolist);

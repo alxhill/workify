@@ -14,45 +14,11 @@
         </header>
 
         <div id="todo-lists" class="pure-g-r" ng-controller="TodoCtrl">
-            <div class="todo-list high-energy pure-u-1-2">
-                <div class="todo-list-box">
-                    <h3>High Energy Tasks</h3>
-                    <div id="no-high" ng-show="(todos | filter:{energy: 'high'}).length == 0">
-                        You have no high energy tasks.
-                        <br><br>
-                        A high energy task could be writing, making, building, or doing something.
-                    </div>
-                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'high'}">
-                        <span class="done-dot done-dot-{{todo.energy}}"></span>
-                        <label for="todo-{{todo.id}}">{{todo.title}}</label>
 
-                    </div>
-                    <form ng-submit="addTodo(input.high, 'high')" class="pure-g">
-                        <input type="text" class="pure-u-4-5" ng-model="input.high" placeholder="Add a task">
-                        <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
-                    </form>
-                </div>
-            </div>
+            <todo-list class="high-energy pure-u-1-2" title="High Energy Tasks" todos="highTodos" remove="remove($id)" add="addTodo($title, 'high')" empty-message="You have no high energy tasks. A high energy task could be writing, making, building, or doing something."></todo-list>
 
-            <div class="todo-list low-energy pure-u-1-2">
-                <div class="todo-list-box">
-                    <h3>Low Energy Tasks</h3>
-                    <div id="no-low" ng-show="(todos | filter:{energy:'low'}).length == 0">
-                        You have no low energy tasks.
-                        <br><br>
-                        A low energy task could be reading, learning, or watching something.
-                    </div>
-                    <div class="todo" ng-repeat="todo in todos | filter:{energy:'low'}">
-                        <span class="done-dot done-dot-{{todo.energy}}"></span>
-                        <input type="checkbox" id="todo-{{todo.id}}" ng-model="todo.done" ng-change="save()">
-                        <label for="todo-{{todo.id}}">{{todo.title}}</label>
-                    </div>
-                    <form ng-submit="addTodo(input.low, 'low')" class="pure-g">
-                        <input type="text" class="pure-u-4-5" ng-model="input.low" placeholder="Add a task">
-                        <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
-                    </form>
-                </div>
-            </div>
+            <todo-list class="high-energy pure-u-1-2" title="Low Energy Tasks" todos="lowTodos" remove="remove($id)" add="addTodo($title, 'low')" empty-message="You have no low energy tasks. A low energy task could be reading, learning, or watching something."></todo-list>
+
         </div>
 
         <footer ng-controller="BlockerCtrl">
@@ -62,6 +28,7 @@
 
         <script src="scripts/app.js"></script>
         <script src="scripts/services.js"></script>
+        <script src="scripts/directives.js"></script>
         <script src="scripts/controllers/todo.js"></script>
         <script src="scripts/controllers/blocker.js"></script>
     </body>
