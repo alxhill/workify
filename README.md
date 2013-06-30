@@ -38,7 +38,6 @@ It delays access to unproductive sites and shows you a list of things you should
 
 #### Bugs
 * Fix block page collapsed UI
-* Stop workify blocking pages opened from another page - e.g reddit comments
 * Don't block facebook api request dialogs
 
 ### Macro

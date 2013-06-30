@@ -11,7 +11,6 @@ angular.module('workify').controller 'TodoCtrl', ($scope, Todos) ->
 
   # semi temporary solution, filters create digest loops
   watchFunc = (todoList) ->
-    console.log 'watchFunc called'
     $scope.highTodos = _.where todoList, energy: 'high'
     $scope.lowTodos = _.where todoList, energy: 'low'
   $scope.$watch 'todos', watchFunc
@@ -23,7 +22,6 @@ angular.module('workify').controller 'TodoCtrl', ($scope, Todos) ->
       title:  title
       energy: level
 
-  $scope.remove = (id) ->
-    Todos.remove id
+  $scope.remove = Todos.remove
 
   return

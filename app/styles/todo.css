@@ -49,11 +49,11 @@ a:hover {
   user-select: none;
   padding-left: 10px;
 }
-.todo-list .todo button.pure-button.remove {
+.todo-list .todo button.pure-button.icon-button {
   color: #c0392b;
   background-color: #34495e;
   float: right;
-  padding: 0;
+  padding: 0 2px;
 }
 .todo-list .todo input[type=checkbox] {
   -webkit-appearance: none;

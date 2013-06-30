@@ -13,7 +13,6 @@ angular.module('workify').controller('TodoCtrl', function($scope, Todos) {
   });
   $scope.todos = Todos.get();
   watchFunc = function(todoList) {
-    console.log('watchFunc called');
     $scope.highTodos = _.where(todoList, {
       energy: 'high'
     });
@@ -31,7 +30,5 @@ angular.module('workify').controller('TodoCtrl', function($scope, Todos) {
       energy: level
     });
   };
-  $scope.remove = function(id) {
-    return Todos.remove(id);
-  };
+  $scope.remove = Todos.remove;
 });

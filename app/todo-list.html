@@ -8,8 +8,11 @@
         <div class="todo" ng-repeat="todo in todos" ng-mouseover="hover=true" ng-mouseout="hover=false">
             <span class="done-dot done-dot-{{todo.energy}}"></span>
             <label for="todo-{{todo.id}}">{{todo.title}}</label>
-            <button ng-click="removeFunc({$id: todo.id})" class="pure-button remove" ng-show="hover">
-                <i class="icon-remove"></i>
+            <button ng-click="removeFunc({$id: todo.id})" class="pure-button icon-button remove" ng-show="hover">
+                <i class="icon-remove-sign"></i>
+            </button>
+            <button ng-click="enableEdit()" class="pure-button icon-button edit" ng-show="hover">
+                <i class="icon-edit-sign"></i>
             </button>
         </div>
         <div class="custom-form" ng-transclude></div>

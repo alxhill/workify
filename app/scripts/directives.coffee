@@ -13,6 +13,7 @@ angular.module('workify').directive 'todoList', ->
 
     if emptyMessage is "" then emptyMessage = "You have no tasks in this list."
 
+    # remove the default form if there's a custom one in use
     if attrs.customForm?
       for form in elem.find('form')
         if form.className.match /default-form/

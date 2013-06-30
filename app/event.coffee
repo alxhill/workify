@@ -11,59 +11,53 @@ chrome.runtime.onInstalled.addListener ->
     restoreUrl: {}
     safeTabs: []
     todolist: [
-      title: "Build Workify"
-      energy: "high"
-      done: false
-      id: 0
+      energy:"high"
+      id:0
+      title:"Build Workify"
     ,
-      title: "Make a HN iOS 7 app"
-      energy: "high"
-      done: false
-      id: 1
+      energy:"high"
+      id:1
+      title:"Make a HN iOS 7 app"
     ,
-      title: "Work on JobFoundry outcomes prototype"
-      energy: "high"
-      done: false
-      id: 2
+      energy:"high"
+      id:3
+      title:"Make a JavaScript compiler"
     ,
-      title: "Make a JavaScript compiler"
-      energy: "high"
-      done: false
-      id: 3
+      energy:"high"
+      id:4
+      title:"Work on ResourceFoundy"
     ,
-      title: "Work on ResourceFoundry"
-      energy: "high"
-      done: false
-      id: 4
+      energy:"low"
+      id:8
+      title:"Learn about creating parsers and lexers"
     ,
-      title: "Read Sal Kahns book on education"
+      energy:"low"
+      id:9
+      title:"Read The Lean Startup"
+    ,
+      energy:"high"
+      id:10
+      title:"Write article on opinion and community"
+    ,
+      energy:"low"
+      id:11
+      title:"Gather resources for JobFoundry"
+    ,
+      energy:"low"
+      id:12
+      title:"Book dentist appointment"
+    ,
       energy: "low"
-      done: false
-      id: 5
+      id: 13
+      title: "Create a landing page for workify"
     ,
-      title: "Learn WebGL and OpenGL basics"
       energy: "low"
-      done: false
-      id: 6
-    ,
-      title: "Improve the Workify logo"
-      energy: "low"
-      done: false
-      id: 7
-    ,
-      title: "Learn about creating parsers and lexers"
-      energy: "low"
-      done: false
-      id: 8
-    ,
-      title: "Read The Lean Startup"
-      energy: "low"
-      done: false
-      id: 9
+      id: 14
+      title: "Write a blog post for workify"
     ]
 
 ### Functions for dealing with tabs and urls ###
-### This is meant to be accesible from outside the background page ###
+### This is accesible from outside the background page ###
 Tab =
   normaliseUrl: (url) ->
     # the <a> tag can parse out the hostname (and other properties) of a url.
@@ -94,6 +88,15 @@ Tab =
     get 'restoreUrl', ({restoreUrl}) ->
       get 'safeTabs', ({safeTabs}) ->
         blockTab = false
+        if tab.openerTabId? and tab.openerTabId in safeTabs
+          # could be a page we shouldn't block. But we need
+          # check that it's the same actual page to block, and
+          # if it isn't, don't put it in safeTabs
+          chrome.tabs.get tab.openerTabId, (openerTab) ->
+            if Tab.normaliseUrl(openerTab.url) is Tab.normaliseUrl(tab.url)
+              safeTabs.push tab.id
+              set safeTabs: safeTabs
+
         Tab.inBlocklist tab.url, ->
           if tab.id not of restoreUrl and tab.id not in safeTabs
             blockTab = true
@@ -122,16 +125,20 @@ Tab =
 
 ### Listen to chrome.tabs events ###
 
-chrome.tabs.onCreated.addListener (tab) ->
-  get 'safeTabs', ({safeTabs}) ->
-    if tab.openerTabId? and tab.openerTabId in safeTabs
-      # could be a page we shouldn't block. But we need
-      # check that it's the same actual page to block, and
-      # if it isn't, don't put it in safeTabs
-      chrome.tabs.get tab.openerTabId, (openerTab) ->
-        if Tab.normaliseUrl(openerTab.url) is Tab.normaliseUrl(tab.url)
-          safeTabs.push tab.id
-          set safeTabs: safeTabs
+# chrome.tabs.onCreated.addListener (tab) ->
+#   get 'safeTabs', ({safeTabs}) ->
+#     console.log 'tab id:',tab.id, 'tab opener:', tab.openerTabId, 'tab:', tab
+#     if tab.openerTabId? and tab.openerTabId in safeTabs
+#       console.log 'tab should be blocked'
+#       # could be a page we shouldn't block. But we need
+#       # check that it's the same actual page to block, and
+#       # if it isn't, don't put it in safeTabs
+#       chrome.tabs.get tab.openerTabId, (openerTab) ->
+#         console.log 'openerTab', openerTab
+#         console.log 'urls'
+#         if Tab.normaliseUrl(openerTab.url) is Tab.normaliseUrl(tab.url)
+#           safeTabs.push tab.id
+#           set safeTabs: safeTabs
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->
   Tab.shouldBlock tab, (blk) -> if blk then Tab.block tab
