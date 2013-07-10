@@ -19,7 +19,6 @@ angular.module('workify').controller 'BlockCtrl', ($scope) ->
   # this probably shouldn't assume the variables are set, but making it not
   # is significantly more complex. So meh.
   $scope.toggle = ->
-    console.log Tab
     if not $scope.blocked
       Tab.addToBlocklist url
     else

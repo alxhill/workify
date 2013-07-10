@@ -23,7 +23,6 @@ angular.module('workify').controller('BlockCtrl', function($scope) {
   });
   $scope.blocked = false;
   $scope.toggle = function() {
-    console.log(Tab);
     if (!$scope.blocked) {
       Tab.addToBlocklist(url);
     } else {

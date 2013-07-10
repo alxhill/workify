@@ -1,7 +1,7 @@
 <div class="todo-list">
     <div class="todo-list-box">
         <h3>{{title}}</h3>
-        <div ng-show="todos.length == 0">
+        <div ng-hide="todos.length">
             {{emptyMessage}}
         </div>
         <!-- switch this to using ng-animate rather than ng-mouse directives -->

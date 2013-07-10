@@ -69,8 +69,6 @@ a:hover {
 }
 .todo-list .todo label {
   font-size: 16.8px;
-  -webkit-user-select: none;
-  user-select: none;
   padding-left: 10px;
 }
 .todo-list .todo button.pure-button.icon-button {

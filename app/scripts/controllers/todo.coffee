@@ -22,6 +22,6 @@ angular.module('workify').controller 'TodoCtrl', ($scope, Todos) ->
       title:  title
       energy: level
 
-  $scope.remove = Todos.remove
+  $scope.remove = (id) -> Todos.remove id
 
   return

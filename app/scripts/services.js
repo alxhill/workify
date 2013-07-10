@@ -6,6 +6,7 @@ angular.module('workify').service('Todos', Todos = (function() {
   function Todos($q, $rootScope) {
     this.$q = $q;
     this.$rootScope = $rootScope;
+    console.log("constructor");
     this.qTodolist = this.$q.defer();
     this.loaded = false;
   }

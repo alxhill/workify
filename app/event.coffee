@@ -29,11 +29,11 @@ chrome.runtime.onInstalled.addListener ->
     ,
       energy:"high"
       id:4
-      title:"Work on ResourceFoundy"
+      title:"Work on resource adding tool"
     ,
       energy:"low"
       id:8
-      title:"Learn about creating parsers and lexers"
+      title:"Learn about parsers and lexers"
     ,
       energy:"low"
       id:9
@@ -41,7 +41,7 @@ chrome.runtime.onInstalled.addListener ->
     ,
       energy:"high"
       id:10
-      title:"Write article on opinion and community"
+      title:"Write article on Opinion and Community"
     ,
       energy:"low"
       id:11
@@ -58,6 +58,14 @@ chrome.runtime.onInstalled.addListener ->
       energy: "low"
       id: 14
       title: "Write a blog post for workify"
+    ,
+      energy: "high"
+      id: 15
+      title: "Write brief for Frankel"
+    ,
+      energy: "low"
+      id: 16
+      title: "Research driving lessons!"
     ]
 
 ### Functions for dealing with tabs and urls ###

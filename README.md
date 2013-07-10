@@ -1,6 +1,6 @@
 # Workify for Chrome
 
-Workify is a productivity toolkit for chrome.
+Workify is a productivity toolkit for Chrome.
 
 It delays access to unproductive sites and shows you a list of things you should be doing. It will also allow you to permanently block sites, and will later track how long you spend on unproductive sites, warning you every 30 minutes or so.
 
@@ -35,10 +35,15 @@ It delays access to unproductive sites and shows you a list of things you should
 #### Features
 * Enable editing of existing tasks
 * Implement task reordering
+* Support adding links in a really nice way
+    * Automatically fetch the title of the page and add the link into the low energy list
+    * Maybe with nice reading icon instead of the dot?
 
 #### Bugs
 * Fix block page collapsed UI
 * Don't block facebook api request dialogs
+* Implement tracking of what page a safeTab can access
+    (this means a page that can browse reddit can't then go on facebook)
 
 ### Macro
 * Perma-blocking
