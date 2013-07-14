@@ -12,7 +12,7 @@ angular.module('workify').controller('BlockerCtrl', function($scope, $timeout) {
       return $timeout(timefunc, 1000);
     }
   }, 1000);
-  $scope.unblock = function() {
+  return $scope.unblock = function() {
     return chrome.tabs.getCurrent(function(tab) {
       return chrome.runtime.sendMessage({
         method: 'unblock',
@@ -20,5 +20,4 @@ angular.module('workify').controller('BlockerCtrl', function($scope, $timeout) {
       });
     });
   };
-  return window.unblock = $scope.unblock;
 });

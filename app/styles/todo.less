@@ -35,8 +35,15 @@
             padding-left: 10px;
         }
 
+        input[type=text].edit-input {
+            padding: 5px;
+            width: 80%;
+            margin-left: 10px;
+            border-radius: @todo-border-radius
+        }
+
         button.pure-button.icon-button {
-            color: @pomegranate;
+            color: @clouds;
             background-color: @wet-asphalt;
             float: right;
             padding: 0 2px;
@@ -55,23 +62,26 @@
         }
     }
 
+    input[type=text] {
+        &:focus {
+            border: none;
+            box-shadow: none;
+            outline-width: 0;
+        }
+        font-family: inherit;
+        -webkit-appearance: none;
+        border: none !important;
+    }
+
     form {
         @input-height: 37px;
 
         padding-top: 10px;
 
         input[type=text] {
-            &:focus {
-                border: none;
-                box-shadow: none;
-                outline-width: 0;
-            }
-            font-family: inherit;
             border-top-left-radius: @todo-border-radius;
             border-bottom-left-radius: @todo-border-radius;
-            border: none !important;
             height: @input-height;
-            -webkit-appearance: none;
             padding-left: 10px;
         }
         .add {

@@ -6,7 +6,6 @@ angular.module('workify').service('Todos', Todos = (function() {
   function Todos($q, $rootScope) {
     this.$q = $q;
     this.$rootScope = $rootScope;
-    console.log("constructor");
     this.qTodolist = this.$q.defer();
     this.loaded = false;
   }
@@ -67,7 +66,6 @@ angular.module('workify').service('Todos', Todos = (function() {
     var _this = this;
     return this.qTodolist.promise.then(function(todolist) {
       var todo, _i, _len;
-      console.log(id, todolist);
       for (_i = 0, _len = todolist.length; _i < _len; _i++) {
         todo = todolist[_i];
         if (todo.id === id) {

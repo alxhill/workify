@@ -16,7 +16,12 @@
         </div>
 
         <div ng-controller="TodoCtrl">
-            <todo-list title="Workify Task List" todos="todos" remove="remove($id)" empty-message="You have no tasks in either of your workify lists" custom-form>
+            <todo-list title="Workify Task List"
+                todos="todos"
+                remove="removeTodo($id)"
+                update="update()"
+                empty-message="You have no tasks in either of your workify lists"
+                custom-form>
                 <form ng-submit="addTodo(input, energy) &amp;&amp; (input='')" class="add-task">
                     <input type="text" class="add-input" ng-model="input" placeholder="Add a task" autofocus>
                     <button type="submit" ng-click="energy='high'" class="pure-button add-high">Add High Energy</button>

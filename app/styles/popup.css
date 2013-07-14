@@ -71,8 +71,14 @@ a:hover {
   font-size: 16.8px;
   padding-left: 10px;
 }
+.todo-list .todo input[type=text].edit-input {
+  padding: 5px;
+  width: 80%;
+  margin-left: 10px;
+  border-radius: 5px;
+}
 .todo-list .todo button.pure-button.icon-button {
-  color: #c0392b;
+  color: #ecf0f1;
   background-color: #34495e;
   float: right;
   padding: 0 2px;
@@ -88,22 +94,24 @@ a:hover {
 .todo-list .todo input[type=checkbox]:checked {
   background-image: url(../images/checkbox-checked.png);
 }
+.todo-list input[type=text] {
+  font-family: inherit;
+  -webkit-appearance: none;
+  border: none !important;
+}
+.todo-list input[type=text]:focus {
+  border: none;
+  box-shadow: none;
+  outline-width: 0;
+}
 .todo-list form {
   padding-top: 10px;
 }
 .todo-list form input[type=text] {
-  font-family: inherit;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  border: none !important;
   height: 37px;
-  -webkit-appearance: none;
   padding-left: 10px;
-}
-.todo-list form input[type=text]:focus {
-  border: none;
-  box-shadow: none;
-  outline-width: 0;
 }
 .todo-list form .add {
   height: 37px;

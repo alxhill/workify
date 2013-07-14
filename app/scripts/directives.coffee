@@ -1,4 +1,10 @@
-angular.module('workify').directive 'todoList', ->
+angular.module('workify').directive 'enterKey', ->
+  (scope, elem, attrs) ->
+    elem.bind 'keydown', (e) ->
+      if e.keyCode is 13
+        scope.$apply attrs.enterKey
+
+angular.module('workify').directive 'todoList', ($timeout) ->
   restrict: 'E'
   replace: true
   transclude: true
@@ -8,6 +14,7 @@ angular.module('workify').directive 'todoList', ->
     todos: '='
     removeFunc: '&remove'
     addFunc: '&add'
+    updateFunc: '&update'
     emptyMessage: '@'
   link: (scope, elem, attrs) ->
 

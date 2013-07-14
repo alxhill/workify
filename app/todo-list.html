@@ -7,18 +7,26 @@
         <!-- switch this to using ng-animate rather than ng-mouse directives -->
         <div class="todo" ng-repeat="todo in todos" ng-mouseover="hover=true" ng-mouseout="hover=false">
             <span class="done-dot done-dot-{{todo.energy}}"></span>
-            <label for="todo-{{todo.id}}">{{todo.title}}</label>
-            <button ng-click="removeFunc({$id: todo.id})" class="pure-button icon-button remove" ng-show="hover">
+            <label for="todo-{{todo.id}}" ng-hide="editing" ng-dblclick="editing=true">{{todo.title}}</label>
+            <input type="text" ng-model="todo.title" ng-show="editing" enter-key="updateFunc(); editing=false" class="edit-input">
+
+            <button ng-click="removeFunc({$id: todo.id})" class="pure-button icon-button remove" ng-show="hover || editing
+            ">
                 <i class="icon-remove-sign"></i>
             </button>
-            <button ng-click="enableEdit()" class="pure-button icon-button edit" ng-show="hover">
+            <button ng-click="editing=true" class="pure-button icon-button edit" ng-show="hover &amp;&amp; !editing">
                 <i class="icon-edit-sign"></i>
+            </button>
+            <button ng-click="updateFunc(); editing=false" class="pure-button icon-button done-edit" ng-show="editing">
+                <i class="icon-check-sign"></i>
             </button>
         </div>
         <div class="custom-form" ng-transclude></div>
-        <form ng-submit="addFunc({$title: input}) &amp;&amp; (input='')" class="pure-g default-form">
+        <form ng-submit="addFunc({$title: input}); input=''" class="pure-g default-form">
             <input type="text" class="pure-u-4-5" ng-model="input" placeholder="Add a task">
-            <button type="submit" class="pure-button pure-u-1-5 add">Add</button>
+            <button type="submit" class="pure-button pure-u-1-5 add">
+                <i class="icon-plus"></i>
+            </button>
         </form>
     </div>
 </div>

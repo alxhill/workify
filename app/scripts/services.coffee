@@ -26,7 +26,8 @@ angular.module('workify').service 'Todos',
       if todolist?
         @_update todolist
       else
-        @qTodolist.promise.then (todolist) => @_update todolist
+        @qTodolist.promise.then (todolist) =>
+          @_update todolist
 
     add: (todo) ->
       console.log @qTodolist
@@ -38,7 +39,6 @@ angular.module('workify').service 'Todos',
 
     remove: (id) ->
       @qTodolist.promise.then (todolist) =>
-        console.log id, todolist
         for todo in todolist
           if todo.id is id
             todolist.splice todolist.indexOf(todo), 1

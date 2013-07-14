@@ -15,9 +15,23 @@
 
         <div id="todo-lists" class="pure-g-r" ng-controller="TodoCtrl">
 
-            <todo-list class="high-energy pure-u-1-2" title="High Energy Tasks" todos="highTodos" remove="remove($id)" add="addTodo($title, 'high')" empty-message="You have no high energy tasks. A high energy task could be writing, making, building, or doing something."></todo-list>
+            <todo-list class="high-energy pure-u-1-2"
+                title="High Energy Tasks"
+                todos="highTodos"
+                remove="removeTodo($id)"
+                add="addTodo($title, 'high')"
+                update="update()"
+                empty-message="You have no high energy tasks. A high energy task could be writing, making, building, or doing something.">
+            </todo-list>
 
-            <todo-list class="high-energy pure-u-1-2" title="Low Energy Tasks" todos="lowTodos" remove="remove($id)" add="addTodo($title, 'low')" empty-message="You have no low energy tasks. A low energy task could be reading, learning, or watching something."></todo-list>
+            <todo-list class="high-energy pure-u-1-2"
+                title="Low Energy Tasks"
+                todos="lowTodos"
+                remove="removeTodo($id)"
+                add="addTodo($title, 'low')"
+                update="update()"
+                empty-message="You have no low energy tasks. A low energy task could be reading, learning, or watching something.">
+            </todo-list>
 
         </div>
 

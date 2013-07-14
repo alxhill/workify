@@ -30,7 +30,7 @@ angular.module('workify').controller('TodoCtrl', function($scope, Todos) {
       energy: level
     });
   };
-  $scope.remove = function(id) {
+  $scope.removeTodo = function(id) {
     return Todos.remove(id);
   };
 });

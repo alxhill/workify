@@ -6,24 +6,28 @@ It delays access to unproductive sites and shows you a list of things you should
 
 ## Feature List
 
+### v0.1
 * Delay before showing site
 * Show a to do list or a reading list where the page would be
     * Split into high and low energy tasks
     * Could integrate with a site like Pocket and/or Trello
-======== v0.1 ========
+
+### v0.2
 * Permanently block certain sites
-======== v0.2 ========
+
+### v0.3
 * Track how long you've spent on certain sites
 * Alert you after a certain amount of time on an unproductive site
     * Show you how much you could have made on minimum wage during that time?
-======== v0.3 ========
+
+### v0.4
 * Focus Mode
     * Permanently blocks certain sites
     * Allows time limited access to other sites
     * Based on the pomodoro technique?
-======== v0.4 ========
+
+### v0.5
 * Replace default new tab page with list
-======== v0.5 ========
 
 ## To do list
 
@@ -33,7 +37,6 @@ It delays access to unproductive sites and shows you a list of things you should
 
 ### Micro
 #### Features
-* Enable editing of existing tasks
 * Implement task reordering
 * Support adding links in a really nice way
     * Automatically fetch the title of the page and add the link into the low energy list
