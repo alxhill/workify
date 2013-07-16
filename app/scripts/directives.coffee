@@ -18,7 +18,7 @@ angular.module('workify').directive 'todoList', ($timeout) ->
     emptyMessage: '@'
   link: (scope, elem, attrs) ->
 
-    if emptyMessage is "" then emptyMessage = "You have no tasks in this list."
+    if scope.emptyMessage is "" then scope.emptyMessage = "You have no tasks in this list."
 
     # remove the default form if there's a custom one in use
     if attrs.customForm?

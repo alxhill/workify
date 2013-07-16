@@ -8,19 +8,22 @@ It delays access to unproductive sites and shows you a list of things you should
 
 ### v0.1
 * Delay before showing site
-* Show a to do list or a reading list where the page would be
-    * Split into high and low energy tasks
-    * Could integrate with a site like Pocket and/or Trello
+* Show a to do list or a reading list where the page would be, split into high and low energy tasks
 
-### v0.2
+### v0.2 - 100 users
 * Permanently block certain sites
+* Research Trello and Pocket support
+* Settings page with list of blocked pages - customise type of block?
+* Support adding links in a really nice way
+    * Automatically fetch the title of the page and add the link into the low energy list
+    * Maybe with nice reading icon instead of the dot?
 
-### v0.3
+### v0.3 - 200 users
 * Track how long you've spent on certain sites
 * Alert you after a certain amount of time on an unproductive site
     * Show you how much you could have made on minimum wage during that time?
 
-### v0.4
+### v0.4 - 1000 users
 * Focus Mode
     * Permanently blocks certain sites
     * Allows time limited access to other sites
@@ -38,9 +41,7 @@ It delays access to unproductive sites and shows you a list of things you should
 ### Micro
 #### Features
 * Implement task reordering
-* Support adding links in a really nice way
-    * Automatically fetch the title of the page and add the link into the low energy list
-    * Maybe with nice reading icon instead of the dot?
+* Add a nicer countdown timer that doesn't show seconds
 
 #### Bugs
 * Fix block page collapsed UI

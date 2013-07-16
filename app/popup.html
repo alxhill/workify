@@ -3,6 +3,9 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="styles/popup.css">
+        <link rel="stylesheet" href="components/jquery-ui-custom/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+        <script src="components/jquery/jquery.min.js"></script>
+        <script src="components/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script src="components/lodash/dist/lodash.min.js"></script>
         <script src="components/angular/angular.js"></script>
     </head>
@@ -22,7 +25,7 @@
                 update="update()"
                 empty-message="You have no tasks in either of your workify lists"
                 custom-form>
-                <form ng-submit="addTodo(input, energy) &amp;&amp; (input='')" class="add-task">
+                <form ng-submit="addTodo(input, energy); input=''" class="add-task">
                     <input type="text" class="add-input" ng-model="input" placeholder="Add a task" autofocus>
                     <button type="submit" ng-click="energy='high'" class="pure-button add-high">Add High Energy</button>
                     <button type="submit" ng-click="energy='low'" class="pure-button add-low">Add Low Energy</button>

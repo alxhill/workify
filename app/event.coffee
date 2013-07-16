@@ -17,7 +17,7 @@ chrome.runtime.onInstalled.addListener ->
     todolist: [
       energy:"high"
       id:0
-      title:"Build Workify"
+      title:"Finish Workify v0.1"
     ,
       energy:"high"
       id:1
@@ -29,7 +29,7 @@ chrome.runtime.onInstalled.addListener ->
     ,
       energy:"high"
       id:4
-      title:"Work on resource adding tool"
+      title:"Connect ResourceFoundry to the back end"
     ,
       energy:"low"
       id:8
@@ -47,25 +47,17 @@ chrome.runtime.onInstalled.addListener ->
       id:11
       title:"Gather resources for JobFoundry"
     ,
-      energy:"low"
-      id:12
-      title:"Book dentist appointment"
+      energy: "low"
+      id: 12
+      title: "Finish the landing page for Workify"
     ,
       energy: "low"
       id: 13
-      title: "Create a landing page for workify"
+      title: "Improve the Workify blog post"
     ,
       energy: "low"
       id: 14
-      title: "Write a blog post for workify"
-    ,
-      energy: "high"
-      id: 15
-      title: "Write brief for Frankel"
-    ,
-      energy: "low"
-      id: 16
-      title: "Research driving lessons!"
+      title: "Research driving lessons"
     ]
 
 ### Functions for dealing with tabs and urls ###
