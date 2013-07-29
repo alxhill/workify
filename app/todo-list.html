@@ -6,12 +6,11 @@
         </div>
         <!-- switch this to using ng-animate rather than ng-mouse directives -->
         <div class="todo" ng-repeat="todo in todos" ng-mouseover="hover=true" ng-mouseout="hover=false">
-            <span class="done-dot done-dot-{{todo.energy}}"></span>
+            <span class="done-dot done-dot-{{energy}}"></span>
             <label for="todo-{{todo.id}}" ng-hide="editing" ng-dblclick="editing=true">{{todo.title}}</label>
             <input type="text" ng-model="todo.title" ng-show="editing" enter-key="updateFunc(); editing=false" class="edit-input">
 
-            <button ng-click="removeFunc({$id: todo.id})" class="pure-button icon-button remove" ng-show="hover || editing
-            ">
+            <button ng-click="removeFunc({$id: todo.id})" class="pure-button icon-button remove" ng-show="hover || editing">
                 <i class="icon-remove-sign"></i>
             </button>
             <button ng-click="editing=true" class="pure-button icon-button edit" ng-show="hover &amp;&amp; !editing">

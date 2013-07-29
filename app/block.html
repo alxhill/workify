@@ -1,11 +1,11 @@
 <html ng-app='workify' ng-csp>
     <head>
         <title>Page Blocked</title>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="components/lodash/dist/lodash.min.js"></script>
-        <script src="components/angular/angular.js"></script>
+        <link rel="stylesheet" href="styles/pure-min.css">
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/lodash/dist/lodash.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
         <link rel="stylesheet" href="styles/block.css">
     </head>
     <body>
@@ -18,7 +18,8 @@
 
             <todo-list class="high-energy pure-u-1-2"
                 title="High Energy Tasks"
-                todos="highTodos"
+                todos="todos"
+                energy="high"
                 remove="removeTodo($id)"
                 add="addTodo($title, 'high')"
                 update="update()"
@@ -27,7 +28,8 @@
 
             <todo-list class="high-energy pure-u-1-2"
                 title="Low Energy Tasks"
-                todos="lowTodos"
+                todos="todos"
+                energy="low"
                 remove="removeTodo($id)"
                 add="addTodo($title, 'low')"
                 update="update()"

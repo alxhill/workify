@@ -1,12 +1,13 @@
 "use strict"
 
 # just because typing chrome.storage.local every time is a pain
+# also means we can globally switch it to sync without much effort.
 get = (name, cb) -> chrome.storage.local.get name, cb
 set = (obj) -> chrome.storage.local.set obj
 
 Array::remove = (element) ->
   if element in this
-    this.splice this.indexOf(element), 1
+    @splice @indexOf(element), 1
 
 # set up the basic backend objects for workify
 chrome.runtime.onInstalled.addListener ->
@@ -14,51 +15,42 @@ chrome.runtime.onInstalled.addListener ->
     blocklist: ["reddit.com", "10fastfingers.com", "facebook.com"]
     restoreUrl: {}
     safeTabs: []
-    todolist: [
-      energy:"high"
-      id:0
-      title:"Finish Workify v0.1"
-    ,
-      energy:"high"
-      id:1
-      title:"Make a HN iOS 7 app"
-    ,
-      energy:"high"
-      id:3
-      title:"Make a JavaScript compiler"
-    ,
-      energy:"high"
-      id:4
-      title:"Connect ResourceFoundry to the back end"
-    ,
-      energy:"low"
-      id:8
-      title:"Learn about parsers and lexers"
-    ,
-      energy:"low"
-      id:9
-      title:"Read The Lean Startup"
-    ,
-      energy:"high"
-      id:10
-      title:"Write article on Opinion and Community"
-    ,
-      energy:"low"
-      id:11
-      title:"Gather resources for JobFoundry"
-    ,
-      energy: "low"
-      id: 12
-      title: "Finish the landing page for Workify"
-    ,
-      energy: "low"
-      id: 13
-      title: "Improve the Workify blog post"
-    ,
-      energy: "low"
-      id: 14
-      title: "Research driving lessons"
-    ]
+    todolist:
+      high: [
+        id:0
+        title:"Finish Workify v0.1"
+      ,
+        id:1
+        title:"Make a HN iOS 7 app"
+      ,
+        id:3
+        title:"Make a JavaScript compiler"
+      ,
+        id:4
+        title:"Connect ResourceFoundry to the back end"
+      ,
+        id:10
+        title:"Write article on Opinion and Community"
+      ]
+      low: [
+        id:8
+        title:"Learn about parsers and lexers"
+      ,
+        id:9
+        title:"Read The Lean Startup"
+      ,
+        id:11
+        title:"Gather resources for JobFoundry"
+      ,
+        id: 12
+        title: "Finish the landing page for Workify"
+      ,
+        id: 13
+        title: "Improve the Workify blog post"
+      ,
+        id: 14
+        title: "Research driving lessons"
+      ]
 
 ### Functions for dealing with tabs and urls ###
 ### This is accesible from outside the background page ###
@@ -130,6 +122,7 @@ Tab =
     get 'blocklist', ({blocklist}) ->
       if host in blocklist then cb()
 
+window.Tab = Tab
 ### Listen to chrome.tabs events ###
 
 chrome.tabs.onUpdated.addListener (id, changeInfo, tab) ->

@@ -17,32 +17,44 @@
       transclude: true,
       templateUrl: 'todo-list.html',
       scope: {
+        todoList: '=todos',
         title: '@',
-        todos: '=',
+        emptyMessage: '@',
+        energy: '@',
         removeFunc: '&remove',
         addFunc: '&add',
-        updateFunc: '&update',
-        emptyMessage: '@'
+        updateFunc: '&update'
       },
       link: function(scope, elem, attrs) {
-        var form, _i, _len, _ref, _results;
+        var form, _i, _len, _ref;
+        console.log(scope.todoList);
+        if (scope.energy !== "") {
+          scope.todos = scope.todoList[scope.energy];
+        } else {
+          scope.$watch('todoList', function() {
+            return scope.todos = scope.todoList.high.concat(scope.todoList.low);
+          }, true);
+        }
         if (scope.emptyMessage === "") {
           scope.emptyMessage = "You have no tasks in this list.";
         }
         if (attrs.customForm != null) {
           _ref = elem.find('form');
-          _results = [];
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             form = _ref[_i];
             if (form.className.match(/default-form/)) {
               form.remove();
               break;
-            } else {
-              _results.push(void 0);
             }
           }
-          return _results;
         }
+        return scope.getEnergy = function(id) {
+          if (scope.energy !== "") {
+            return scope.energy;
+          } else {
+
+          }
+        };
       }
     };
   });

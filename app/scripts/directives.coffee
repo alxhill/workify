@@ -10,13 +10,21 @@ angular.module('workify').directive 'todoList', ($timeout) ->
   transclude: true
   templateUrl: 'todo-list.html'
   scope:
+    todoList: '=todos'
     title: '@'
-    todos: '='
+    emptyMessage: '@'
+    energy: '@'
     removeFunc: '&remove'
     addFunc: '&add'
     updateFunc: '&update'
-    emptyMessage: '@'
   link: (scope, elem, attrs) ->
+    console.log scope.todoList
+    if scope.energy isnt ""
+      scope.todos = scope.todoList[scope.energy]
+    else
+      scope.$watch 'todoList', ->
+        scope.todos = scope.todoList.high.concat scope.todoList.low
+      , true
 
     if scope.emptyMessage is "" then scope.emptyMessage = "You have no tasks in this list."
 
@@ -26,3 +34,7 @@ angular.module('workify').directive 'todoList', ($timeout) ->
         if form.className.match /default-form/
           form.remove()
           break
+
+    scope.getEnergy = (id) ->
+      if scope.energy isnt "" then scope.energy
+      else

@@ -9,18 +9,10 @@ angular.module('workify').controller 'TodoCtrl', ($scope, Todos) ->
 
   $scope.todos = Todos.get()
 
-  # semi temporary solution, filters create digest loops
-  watchFunc = (todoList) ->
-    $scope.highTodos = _.where todoList, energy: 'high'
-    $scope.lowTodos = _.where todoList, energy: 'low'
-  $scope.$watch 'todos', watchFunc
-
   $scope.update = -> Todos.update()
 
-  $scope.addTodo = (title, level) ->
-    Todos.add
-      title:  title
-      energy: level
+  $scope.addTodo = (title, energy) ->
+    Todos.add title, energy
 
   $scope.removeTodo = (id) -> Todos.remove id
 

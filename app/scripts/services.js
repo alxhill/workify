@@ -7,30 +7,39 @@
     function Todos($q, $rootScope) {
       this.$q = $q;
       this.$rootScope = $rootScope;
-      this.qTodolist = this.$q.defer();
+      this.reset();
       this.loaded = false;
     }
+
+    Todos.prototype.reset = function() {
+      return this.qTodolists = this.$q.defer();
+    };
 
     Todos.prototype.get = function() {
       var _this = this;
       if (this.loaded) {
-        this.qTodolist = this.$q.defer();
+        this.reset();
       }
       chrome.storage.local.get('todolist', function(_arg) {
-        var todolist;
+        var newTodolist, todolist;
         todolist = _arg.todolist;
         if (todolist != null) {
           _this.$rootScope.$apply(function() {
-            return _this.qTodolist.resolve(todolist);
+            return _this.qTodolists.resolve(todolist);
           });
         } else {
+          newTodolist = {
+            high: [],
+            low: []
+          };
           _this.$rootScope.$apply(function() {
-            return _this.qTodolist.resolve([]);
+            return _this.qTodolists.resolve(newTodolist);
           });
+          _this.update(newTodolist);
         }
         return _this.loaded = true;
       });
-      return this.qTodolist.promise;
+      return this.qTodolists.promise;
     };
 
     Todos.prototype._update = function(todolist) {
@@ -40,38 +49,46 @@
       return chrome.runtime.sendMessage("updateList");
     };
 
-    Todos.prototype.update = function(todolist) {
+    Todos.prototype.update = function(todolists) {
       var _this = this;
-      if (todolist != null) {
-        return this._update(todolist);
+      if (todolists != null) {
+        return this._update(todolists);
       } else {
-        return this.qTodolist.promise.then(function(todolist) {
-          return _this._update(todolist);
+        return this.qTodolists.promise.then(function(todolists) {
+          return _this._update(todolists);
         });
       }
     };
 
-    Todos.prototype.add = function(todo) {
+    Todos.prototype.add = function(title, energy) {
       var _this = this;
-      console.log(this.qTodolist);
-      return this.qTodolist.promise.then(function(todolist) {
+      return this.qTodolists.promise.then(function(todolists) {
         return _this._getNextId().then(function(nextId) {
-          todo.id = nextId;
-          todolist.push(todo);
-          return _this.update(todolist);
+          var todo;
+          todo = {
+            id: nextId,
+            title: title
+          };
+          todolists[energy].push(todo);
+          return _this.update(todolists);
         });
       });
     };
 
     Todos.prototype.remove = function(id) {
       var _this = this;
-      return this.qTodolist.promise.then(function(todolist) {
-        var todo, _i, _len;
-        for (_i = 0, _len = todolist.length; _i < _len; _i++) {
-          todo = todolist[_i];
-          if (todo.id === id) {
-            todolist.splice(todolist.indexOf(todo), 1);
-            break;
+      return this.qTodolists.promise.then(function(todolists) {
+        var energy, todo, todolist, _i, _len;
+        console.log(todolists);
+        for (energy in todolists) {
+          todolist = todolists[energy];
+          for (_i = 0, _len = todolist.length; _i < _len; _i++) {
+            todo = todolist[_i];
+            console.log(todo.id, id);
+            if (todo.id === id) {
+              todolist.splice(todolist.indexOf(todo), 1);
+              break;
+            }
           }
         }
         return _this.update(todolist);
@@ -81,11 +98,13 @@
     Todos.prototype._getNextId = function() {
       var qId;
       qId = this.$q.defer();
-      this.qTodolist.promise.then(function(todolist) {
-        if (todolist.length === 0) {
+      this.qTodolists.promise.then(function(todolists) {
+        var todos;
+        todos = _(todolists).values().flatten().value();
+        if (todos.length !== 0) {
           return qId.resolve(0);
         } else {
-          return qId.resolve(1 + _.max(todolist, "id").id);
+          return qId.resolve(1 + _.max(todos, "id").id);
         }
       });
       return qId.promise;

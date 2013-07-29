@@ -3,55 +3,67 @@
 angular.module('workify').service 'Todos',
   class Todos
     constructor: (@$q, @$rootScope) ->
-      @qTodolist = @$q.defer()
+      @reset()
       @loaded = false
+
+    reset: ->
+      @qTodolists = @$q.defer()
 
     get: ->
       # make sure to get a new deferred object when this is called
-      if @loaded then @qTodolist = @$q.defer()
+      if @loaded then @reset()
       chrome.storage.local.get 'todolist', ({todolist}) =>
         if todolist?
-          @$rootScope.$apply => @qTodolist.resolve todolist
+          @$rootScope.$apply => @qTodolists.resolve todolist
         else
-          @$rootScope.$apply => @qTodolist.resolve []
+          newTodolist =
+            high: []
+            low: []
+          @$rootScope.$apply => @qTodolists.resolve newTodolist
+          @update(newTodolist)
         @loaded = true
 
-      return @qTodolist.promise
+      return @qTodolists.promise
 
     _update: (todolist) ->
       chrome.storage.local.set todolist: todolist
       chrome.runtime.sendMessage "updateList"
 
-    update: (todolist) ->
-      if todolist?
-        @_update todolist
+    update: (todolists) ->
+      if todolists?
+        @_update todolists
       else
-        @qTodolist.promise.then (todolist) =>
-          @_update todolist
+        @qTodolists.promise.then (todolists) =>
+          @_update todolists
 
-    add: (todo) ->
-      console.log @qTodolist
-      @qTodolist.promise.then (todolist) =>
+    add: (title, energy) ->
+      @qTodolists.promise.then (todolists) =>
         @_getNextId().then (nextId) =>
-          todo.id = nextId
-          todolist.push todo
-          @update(todolist)
+          todo =
+            id: nextId
+            title: title
+          todolists[energy].push todo
+          @update(todolists)
 
     remove: (id) ->
-      @qTodolist.promise.then (todolist) =>
-        for todo in todolist
-          if todo.id is id
-            todolist.splice todolist.indexOf(todo), 1
-            break
+      @qTodolists.promise.then (todolists) =>
+        console.log todolists
+        for energy, todolist of todolists
+          for todo in todolist
+            console.log todo.id, id
+            if todo.id is id
+              todolist.splice todolist.indexOf(todo), 1
+              break
         @update(todolist)
 
     _getNextId: ->
       qId = @$q.defer()
 
-      @qTodolist.promise.then (todolist) ->
-        if todolist.length is 0
+      @qTodolists.promise.then (todolists) ->
+        todos = _(todolists).values().flatten().value()
+        if todos.length isnt 0
           qId.resolve 0
         else
-          qId.resolve 1 + _.max(todolist, "id").id
+          qId.resolve 1 + _.max(todos, "id").id
 
       return qId.promise
