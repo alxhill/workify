@@ -15,49 +15,45 @@ chrome.runtime.onInstalled.addListener ->
     restoreUrl: {}
     safeTabs: []
     todolist: [
-      energy:"high"
-      id:0
-      title:"Finish Workify v0.1"
-    ,
-      energy:"high"
-      id:1
-      title:"Make a HN iOS 7 app"
-    ,
-      energy:"high"
-      id:3
-      title:"Make a JavaScript compiler"
-    ,
-      energy:"high"
-      id:4
-      title:"Connect ResourceFoundry to the back end"
-    ,
-      energy:"low"
-      id:8
-      title:"Learn about parsers and lexers"
-    ,
-      energy:"low"
-      id:9
-      title:"Read The Lean Startup"
-    ,
-      energy:"high"
-      id:10
-      title:"Write article on Opinion and Community"
-    ,
-      energy:"low"
-      id:11
-      title:"Gather resources for JobFoundry"
-    ,
-      energy: "low"
-      id: 12
-      title: "Finish the landing page for Workify"
-    ,
-      energy: "low"
-      id: 13
-      title: "Improve the Workify blog post"
-    ,
-      energy: "low"
-      id: 14
-      title: "Research driving lessons"
+        energy:"high"
+        id:0
+        title:"Finish Workify v0.1"
+      ,
+        energy:"high"
+        id:1
+        title:"Make a HN iOS 7 app"
+      ,
+        energy:"high"
+        id:3
+        title:"Make a JavaScript compiler"
+      ,
+        energy:"high"
+        id:4
+        title:"Make TaskFoundry"
+      ,
+        energy:"low"
+        id:8
+        title:"Learn about AngularJS internals"
+      ,
+        energy:"low"
+        id:9
+        title:"Read The Lean Startup"
+      ,
+        energy:"high"
+        id:10
+        title:"Work on Julian's EUJO site"
+      ,
+        energy:"low"
+        id:11
+        title:"Gather resources and make tasks for JobFoundry"
+      ,
+        energy:"low"
+        id:12
+        title:"Improve the JobFoundry landing page (with Ed)"
+      ,
+        energy:"low"
+        id:13
+        title:"Improve the Workify blog post"
     ]
 
 ### Functions for dealing with tabs and urls ###
