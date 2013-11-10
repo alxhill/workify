@@ -2,3 +2,4 @@ app/*.js
 app/bower_components
 node_modules
 workify.sublime-*
+.DS_Store
