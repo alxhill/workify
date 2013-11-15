@@ -44,7 +44,6 @@ It delays access to unproductive sites and shows you a list of things you should
 * Add a nicer countdown timer that doesn't show seconds
 
 #### Bugs
-* Fix block page collapsed UI
 * Don't block facebook api request dialogs
 * Implement tracking of what page a safeTab can access
     (this means a page that can browse reddit can't then go on facebook)

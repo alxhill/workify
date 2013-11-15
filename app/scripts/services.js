@@ -53,7 +53,6 @@
 
     Todos.prototype.add = function(todo) {
       var _this = this;
-      console.log(this.qTodolist);
       return this.qTodolist.promise.then(function(todolist) {
         return _this._getNextId().then(function(nextId) {
           todo.id = nextId;

@@ -30,7 +30,6 @@ angular.module('workify').service 'Todos',
           @_update todolist
 
     add: (todo) ->
-      console.log @qTodolist
       @qTodolist.promise.then (todolist) =>
         @_getNextId().then (nextId) =>
           todo.id = nextId

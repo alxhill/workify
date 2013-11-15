@@ -58,7 +58,7 @@ chrome.runtime.onInstalled.addListener ->
 
 ### Functions for dealing with tabs and urls ###
 ### This is accesible from outside the background page ###
-Tab =
+window.Tab =
   normaliseUrl: (url) ->
     # the <a> tag can parse out the hostname (and other properties) of a url.
     urlParser = document.createElement 'a'

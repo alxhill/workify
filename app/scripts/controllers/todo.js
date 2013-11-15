@@ -12,7 +12,9 @@
         });
       }
     });
-    $scope.todos = Todos.get();
+    Todos.get().then(function(todolist) {
+      return $scope.todos = todolist;
+    });
     watchFunc = function(todoList) {
       $scope.highTodos = _.where(todoList, {
         energy: 'high'
