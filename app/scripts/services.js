@@ -35,7 +35,7 @@
 
     Todos.prototype._update = function(todolist) {
       chrome.storage.local.set({
-        todolist: todolist
+        todolist: angular.copy(todolist)
       });
       return chrome.runtime.sendMessage("updateList");
     };

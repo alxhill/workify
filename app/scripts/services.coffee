@@ -19,7 +19,7 @@ angular.module('workify').service 'Todos',
       return @qTodolist.promise
 
     _update: (todolist) ->
-      chrome.storage.local.set todolist: todolist
+      chrome.storage.local.set todolist: angular.copy todolist
       chrome.runtime.sendMessage "updateList"
 
     update: (todolist) ->
